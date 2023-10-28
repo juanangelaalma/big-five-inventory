@@ -15,7 +15,7 @@
                     Kenali diri dengan identifikasi kepribadian lengkap. Dengan biaya terjangkau, sekali klik, anda sudah dapat mengikuti tes identifikasi kepribadian. Hasil tes (laporan hasil tes psikologi / psikogram) dapat diakses dalam waktu 1 x 24 jam setelah penyelesaian tes.
                 </p>
                 <div class="flex flex-col items-center gap-4 lg:flex-row">
-                    <x-guest.primary-button href="{{ route('register') }}" class="lg:w-1/2">
+                    <x-guest.primary-button href="{{ route('register') }}" class="lg:w-1/2 py-3">
                         Daftar
                     </x-guest.primary-button>
                     <button
