@@ -16,14 +16,14 @@
                         <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                             Masuk Akun
                         </h1>
-                        <x-text-input name="email" placeholder="Email" type="email" label="Email" />
-                        <x-text-input name="password" type="password" placeholder="Password" label="Password" />
-
-                        <a class="block w-full px-4 py-2 mt-6 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                            href="./login.html">
-                            Masuk Akun
-                        </a>
-
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+                            <x-text-input name="email" placeholder="Email" type="email" label="Email" value="{{ old('email') }}" />
+                            <x-text-input name="password" type="password" placeholder="Password" label="Password" />
+                            <x-guest.primary-button type="submit" class="mt-6">
+                                Masuk
+                            </x-guest.primary-button>
+                        </form>
                         <p class="mt-4">
                             <a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
                                 href="{{ route('register') }}">
