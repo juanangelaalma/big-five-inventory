@@ -13,9 +13,8 @@
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
-    <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+    <div class="bg-white">
         {{ $slot }}
     </div>
 </body>
-
 </html>
