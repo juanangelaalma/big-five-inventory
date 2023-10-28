@@ -1,8 +1,5 @@
 <nav class="relative flex flex-wrap items-center justify-between w-full bg-white group py-7 shrink-0">
-    <div>
-        <img class="h-8"
-            src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/motion-tailwind/img/logos/logo-nav-0.png">
-    </div>
+    <x-brand />
     <div class="items-center justify-between hidden gap-12 text-black md:flex">
         <a class="text-md font-normal text-dark-grey-700 hover:text-dark-grey-900" href="javascript:void(0)">Product</a>
         <a class="text-md font-normal text-dark-grey-700 hover:text-dark-grey-900" href="javascript:void(0)">Features</a>
@@ -10,12 +7,11 @@
         <a class="text-md font-normal text-dark-grey-700 hover:text-dark-grey-900" href="javascript:void(0)">Company</a>
     </div>
     <div class="items-center hidden gap-8 md:flex">
-        <button
-            class="flex items-center text-md font-normal text-gray-800 hover:text-gray-900 transition duration-300">Masuk</button>
-        <a class="block w-full px-4 py-2 text-md font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-            href="./login.html">
-            Daftar
-        </a>
+        <a href="{{ route('login') }}"
+            class="flex items-center text-md font-semibold text-purple-600 hover:text-gray-900 transition duration-300">Masuk</button>
+            <x-guest.primary-button href="{{ route('register') }}">
+                Daftar
+            </x-guest.primary-button>
     </div>
     <button onclick="(() => { this.closest('.group').classList.toggle('open')})()" class="flex md:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
