@@ -1,0 +1,1 @@
+<x-guest.primary-button class="bg-red-600 hover:bg-red-700">{{ $slot }}</x-guest.primary-button>

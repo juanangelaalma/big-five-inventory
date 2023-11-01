@@ -1,11 +1,10 @@
 <aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
     <div class="py-4 text-gray-500 dark:text-gray-400">
         <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-            Windmill
+            {{ config('app.name') }}
         </a>
         <ul>
-            <x-admin.sidebar-link href="www.google.com" title="Dashboard"
-                class="mt-5"
+            <x-admin.sidebar-link href="{{ route('admin.index') }}" title="Dashboard" class="mt-5"
                 active="{{ request()->is('admin') ? 'active' : '' }}">
                 <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                     stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -14,7 +13,7 @@
                     </path>
                 </svg>
             </x-admin.sidebar-link>
-            <x-admin.sidebar-link href="www.google.com" title="Users"
+            <x-admin.sidebar-link href="{{ route('admin.users') }}" title="Users"
                 active="{{ request()->is('admin/users*') ? 'active' : '' }}">
                 <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                     stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
