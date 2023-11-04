@@ -9,16 +9,6 @@
                     value="{{ $user->email }}" />
                 <x-text-input name="name" placeholder="Nama" type="text" label="Nama"
                     value="{{ $user->name }}" />
-                <x-text-input name="birth_location" placeholder="Tempat Lahir" type="text" label="Tempat Lahir"
-                    value="{{ $user->birth_location }}" />
-                <x-text-input name="birth_date" placeholder="Tanggal Lahir" type="date" label="Tanggal Lahir"
-                    value="{{ $user->birth_date }}" />
-                <input id="male" type="radio" name="gender"
-                    @if ($user->gender === 'male') @checked(true) @endif value="male" class="mr-2"><label
-                    for="male" class="mr-2 text-sm">Laki-laki</label>
-                <input id="female" type="radio" name="gender"
-                    @if ($user->gender === 'female') @checked(true) @endif value="female" class="mr-2"><label
-                    for="female" class="mr-2 text-sm">Perempuan</label>
                 <label class="block mt-4 text-sm">
                     <span class="text-gray-700 dark:text-gray-400">
                         Role

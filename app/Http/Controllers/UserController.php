@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
@@ -11,8 +12,13 @@ class UserController extends Controller
 {
     public function users()
     {
-        $users = User::all();
+        $currentUser = Auth::user();
+        $users = User::with('profile')->whereNot('id', $currentUser->id)->get();
         return view('admin.users.index', compact('users'));
+    }
+
+    public function details(User $user) {
+        return view('admin.users.details', compact('user'));
     }
 
     public function create(User $user)
@@ -27,9 +33,6 @@ class UserController extends Controller
             'name' => 'required|max:255',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', Rules\Password::defaults()],
-            'birth_location' => 'required|max:255',
-            'birth_date' => 'required|date',
-            'gender' => 'required|in:male,female',
             'role' => 'required|in:' . implode(',', User::ROLES),
         ]);
 
@@ -37,9 +40,6 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->name = $request->name;
-        $user->birth_location = $request->birth_location;
-        $user->birth_date = $request->birth_date;
-        $user->gender = $request->gender;
         $user->role = $request->role;
         $user->save();
 
@@ -56,16 +56,10 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
-            'birth_location' => 'required|max:255',
-            'birth_date' => 'required|date',
-            'gender' => 'required|in:male,female',
             'role' => 'required|in:' . implode(',', User::ROLES)
         ]);
 
         $user->name = $request->name;
-        $user->birth_location = $request->birth_location;
-        $user->birth_date = $request->birth_date;
-        $user->gender = $request->gender;
         $user->role = $request->role;
         $user->save();
 
