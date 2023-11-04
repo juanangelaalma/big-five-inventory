@@ -22,14 +22,6 @@
                                 label="Nama Lengkap" />
                             <x-text-input name="email" value="{{ old('email') }}" placeholder="Email" type="email" label="Email" />
                             <x-text-input name="password" type="password" placeholder="Password" label="Password" />
-                            <x-text-input name="birth_location" value="{{ old('birth_location') }}" type="text" placeholder="Tempat Lahir"
-                                label="Tempat Lahir" />
-                            <x-text-input name="birth_date" value="{{ old('birth_date') }}" type="date" placeholder="Tanggal Lahir"
-                                label="Tanggal Lahir" />
-                            <input id="male" type="radio" name="gender" value="male" class="mr-2"><label
-                                for="male" class="mr-2 text-sm">Laki-laki</label>
-                            <input id="female" type="radio" name="gender" value="female" class="mr-2"><label
-                                for="female" class="mr-2 text-sm">Perempuan</label>
                             <x-guest.primary-button type="submit" class="mt-6">
                                 Buat Akun
                             </x-guest.primary-button>

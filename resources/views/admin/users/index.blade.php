@@ -11,7 +11,6 @@
                         <th class="px-4 py-3">Name</th>
                         <th class="px-4 py-3">Email</th>
                         <th class="px-4 py-3">Tempat, Tanggal Lahir</th>
-                        <th class="px-4 py-3">Jenis Kelamin</th>
                         <th class="px-4 py-3">Role</th>
                         <th class="px-4 py-3">Action</th>
                     </tr>
@@ -28,15 +27,14 @@
                                 {{ $user->email }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $user->birth_location . ', ' . $user->birth_date }}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ $user->gender }}
+                                {{ $user->profile ? merge_birth_data($user->profile->birth_location, $user->profile->birth_date)  : '' }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ ucwords($user->role) }}
                             </td>
                             <td class="px-4 py-3 flex space-x-2">
+                                <a href="{{ route('admin.users.details', $user) }}"
+                                    class="text-sm bg-green-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-green-500 transition-colors duration-200">Detail</a>
                                 <a href="{{ route('admin.users.edit', $user) }}"
                                     class="text-sm bg-orange-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-orange-500 transition-colors duration-200">Edit</a>
                                 <form action="{{ route('admin.users.destroy', $user) }}" method="POST">
