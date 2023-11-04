@@ -17,7 +17,7 @@ class UserController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
-    public function details(User $user) {
+    public function show(User $user) {
         return view('admin.users.details', compact('user'));
     }
 
@@ -27,7 +27,7 @@ class UserController extends Controller
         return view('admin.users.create', compact('user', 'roles'));
     }
 
-    public function save(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|max:255',

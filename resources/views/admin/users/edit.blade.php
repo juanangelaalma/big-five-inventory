@@ -9,19 +9,12 @@
                     value="{{ $user->email }}" />
                 <x-text-input name="name" placeholder="Nama" type="text" label="Nama"
                     value="{{ $user->name }}" />
-                <label class="block mt-4 text-sm">
-                    <span class="text-gray-700 dark:text-gray-400">
-                        Role
-                    </span>
-                    <select name="role"
-                        class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input border-1 rounded-sm border-cool-gray-200">
-                        @foreach ($roles as $role)
-                            <option @if ($role === $user->role) @selected(true) @endif
-                                value="{{ $role }}">
-                                {{ ucwords($role) }}</option>
-                        @endforeach
-                    </select>
-                </label>
+                <x-text-select name="role" label="Role">
+                    @foreach ($roles as $role)
+                        <option @if ($role === $user->role) @selected(true) @endif value="{{ $role }}">
+                            {{ ucwords($role) }}</option>
+                    @endforeach
+                </x-text-select>
                 <div class="w-full lg:w-[100px]">
                     <x-guest.primary-button type="submit" class="mt-6">
                         Masuk
