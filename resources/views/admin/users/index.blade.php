@@ -33,7 +33,7 @@
                                 {{ ucwords($user->role) }}
                             </td>
                             <td class="px-4 py-3 flex space-x-2">
-                                <a href="{{ route('admin.users.details', $user) }}"
+                                <a href="{{ route('admin.users.show', $user) }}"
                                     class="text-sm bg-green-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-green-500 transition-colors duration-200">Detail</a>
                                 <a href="{{ route('admin.users.edit', $user) }}"
                                     class="text-sm bg-orange-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-orange-500 transition-colors duration-200">Edit</a>

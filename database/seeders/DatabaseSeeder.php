@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         UserFactory::new();
         $this->call([
+            UserSeeder::class,
             DimensionSeeder::class,
             InstrumentSeeder::class,
         ]);
