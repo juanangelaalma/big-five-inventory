@@ -16,5 +16,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         UserFactory::new();
+        $this->call([
+            DimensionSeeder::class,
+            InstrumentSeeder::class,
+        ]);
     }
 }
