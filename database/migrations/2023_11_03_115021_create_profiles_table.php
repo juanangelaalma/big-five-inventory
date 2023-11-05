@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('student_number', 15);
+            $table->string('student_number', 15)->nullable();
             $table->integer('batch')->nullable();
             $table->string('major', 25)->nullable();
-            $table->enum('gender', ['male', 'female']);
+            $table->enum('gender', ['male', 'female'])->nullable();
             $table->string('birth_location', 50)->nullable();
             $table->date('birth_date')->nullable();
             $table->string('ethnicity', 25)->nullable();
