@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Profile;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,22 @@ class ProfileController extends Controller
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
+
+        $profile = Profile::where('user_id', $request->user()->id)->first();
+
+        if(!$profile) {
+            $profile = new Profile();
+            $profile->user_id = $request->user()->id;
+        }
+
+        $profile->student_number = $request->student_number;
+        $profile->batch = $request->batch;
+        $profile->major = $request->major;
+        $profile->gender = $request->gender;
+        $profile->birth_location = $request->birth_location;
+        $profile->birth_date = $request->birth_date;
+        $profile->ethnicity = $request->ethnicity;
+        $profile->save();
 
         $request->user()->save();
 
