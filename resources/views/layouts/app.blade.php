@@ -19,7 +19,7 @@
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
         <div class="w-full bg-white border-b-[1px]">
-            <div class="container flex flex-col bg-white px-6 mx-auto">
+            <div class="container flex flex-col bg-white px-6 mx-auto max-w-6xl mx-auto">
                 <x-guest.navbar />
             </div>
         </div>
@@ -28,7 +28,7 @@
         <!-- Page Heading -->
         @if (isset($header))
             <header class="bg-white dark:bg-gray-800 shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
             </header>

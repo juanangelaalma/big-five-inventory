@@ -10,13 +10,16 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('guest.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/instruments', [InstrumentController::class, 'answer'])->name('instruments.answer');
+    Route::post('/instruments', [InstrumentController::class, 'submitAnswers'])->name('instruments.answer.submit');
 });
 
 Route::prefix('admin')->middleware(['auth', 'roles:admin'])->group(function () {

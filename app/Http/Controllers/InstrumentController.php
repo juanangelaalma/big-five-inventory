@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Dimension;
 use App\Models\Instrument;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class InstrumentController extends Controller
 {
@@ -85,5 +88,47 @@ class InstrumentController extends Controller
     {
         $instrument->delete();
         return back();
+    }
+
+    public function answer() {
+        $instruments = Instrument::orderBy('numbering')->get();
+        $user = Auth::user();
+        return view('guest.instruments.answer', compact('instruments', 'user'));
+    }
+
+    public function submitAnswers(Request $request) {
+        $instrument_ids = Instrument::pluck('id')->toArray();
+        $validate_array = [];
+        foreach($instrument_ids as $instrument_id) {
+            $validate_array["answer-$instrument_id"] = "required";
+        }
+    
+        $request->validate($validate_array);
+
+        $allRequestWithoutToken = $request->except('_token');
+        $filteredRequest = $this->getValidInput($allRequestWithoutToken);
+        
+        Answer::insert($filteredRequest);
+
+        return back();
+    }
+
+    private function getValidInput($validatedRequests): array {
+        $results = [];
+        $user_id = Auth::user()->id;
+
+        foreach($validatedRequests as $key => $value) {
+            $instrumentId = str_replace('answer-', '', $key);
+
+            $newArray = [
+                'instrument_id' => (int) $instrumentId,
+                'score' => (int) $value,
+                'user_id' => $user_id
+            ];
+
+            $results[] = $newArray;
+        }
+
+        return $results;
     }
 }

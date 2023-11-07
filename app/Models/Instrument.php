@@ -14,4 +14,8 @@ class Instrument extends Model
     public function dimension() {
         return $this->belongsTo(Dimension::class);
     }
+
+    public function answers() {
+        return $this->hasMany(Answer::class);
+    }
 }

@@ -23,7 +23,7 @@ class ProfileUpdateRequest extends FormRequest
             'batch' => ['nullable', 'integer'],
             'major' => ['nullable', 'string', 'max:100'],
             'gender' => ['nullable', 'string', 'in:male,female'],
-            'birth_location' => ['required', 'string', 'max:100'],
+            'birth_location' => ['nullable', 'string', 'max:100'],
             'birth_date' => ['nullable', 'date'],
             'ethnicity' => ['nullable', 'string', 'max:100'],
         ];
