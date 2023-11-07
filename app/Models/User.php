@@ -50,6 +50,10 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
+    public function answers() {
+        return $this->hasMany(Answer::class);
+    }
+
     public function isAdmin() {
         return $this->role === 'admin';
     }
@@ -60,5 +64,22 @@ class User extends Authenticatable
 
     public function isStudent() {
         return $this->role === 'student';
+    }
+
+    public function hasCompleteProfile() {
+        if(!$this->profile) {
+            return false;
+        }
+
+        return $this->profile->student_number
+                && $this->profile->batch
+                && $this->profile->major
+                && $this->profile->birth_location
+                && $this->profile->birth_date
+                && $this->profile->ethnicity;
+    }
+
+    public function hasCompleteInstruments() {
+        return $this->instruments->count() > 0;
     }
 }
