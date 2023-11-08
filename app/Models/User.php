@@ -80,6 +80,6 @@ class User extends Authenticatable
     }
 
     public function hasCompleteInstruments() {
-        return $this->instruments->count() > 0;
+        return $this->answers->count() > 0;
     }
 }

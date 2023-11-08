@@ -12,3 +12,12 @@ function merge_birth_data($birth_location, $birth_date) {
 function avoidNullError($data, $key) {
   return $data ? $data[$key] : '';
 }
+
+function translateGender($gender) {
+  if(!$gender) return "";
+  $genders = [
+    'male' => 'Laki-laki',
+    'female' => 'Perempuan'
+  ];
+  return $genders[$gender];
+}
