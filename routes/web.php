@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InstrumentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -45,6 +46,10 @@ Route::prefix('admin')->middleware(['auth', 'roles:admin'])->group(function () {
         Route::put('/{instrument:id}/update', [InstrumentController::class, 'update'])->name('admin.instruments.update');
         Route::post('/{instrument:id}/destroy', [InstrumentController::class, 'destroy'])->name('admin.instruments.destroy');
     });
+});
+
+Route::prefix('counselor')->middleware(['auth', 'roles:counselor'])->group(function() {
+    Route::get('/', [DashboardController::class, 'counselor'])->name('counselor.index');
 });
 
 require __DIR__ . '/auth.php';
