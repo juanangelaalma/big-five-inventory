@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\InstrumentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -21,6 +22,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/instruments', [InstrumentController::class, 'answer'])->name('instruments.answer');
     Route::post('/instruments', [InstrumentController::class, 'submitAnswers'])->name('instruments.answer.submit');
+
+    Route::get('/answers', [AnswerController::class, 'result'])->name('answers.result');
 });
 
 Route::prefix('admin')->middleware(['auth', 'roles:admin'])->group(function () {
@@ -50,6 +53,8 @@ Route::prefix('admin')->middleware(['auth', 'roles:admin'])->group(function () {
 
 Route::prefix('counselor')->middleware(['auth', 'roles:counselor'])->group(function() {
     Route::get('/', [DashboardController::class, 'counselor'])->name('counselor.index');
+
+    Route::get('/answers', [AnswerController::class, 'getUsersWithAnswers'])->name('counselor.answers');
 });
 
 require __DIR__ . '/auth.php';
