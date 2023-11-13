@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/instruments', [InstrumentController::class, 'answer'])->name('instruments.answer');
     Route::post('/instruments', [InstrumentController::class, 'submitAnswers'])->name('instruments.answer.submit');
+    Route::get('instruments/back', [InstrumentController::class, 'back'])->name('instruments.answer.back');
 
     Route::get('/answers', [AnswerController::class, 'result'])->name('answers.result');
 });
@@ -55,6 +56,10 @@ Route::prefix('counselor')->middleware(['auth', 'roles:counselor'])->group(funct
     Route::get('/', [DashboardController::class, 'counselor'])->name('counselor.index');
 
     Route::get('/answers', [AnswerController::class, 'getUsersWithAnswers'])->name('counselor.answers');
+});
+
+Route::get('/test-component', function() {
+    return view(request()->component);
 });
 
 require __DIR__ . '/auth.php';
