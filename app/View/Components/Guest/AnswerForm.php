@@ -12,9 +12,13 @@ class AnswerForm extends Component
      * Create a new component instance.
      */
     public $instruments = null;
-    public function __construct($instruments = null)
+    public $isLastInstrument = false;
+    public $previousLastAnswer = null;
+    public function __construct($instruments = null, $isLastInstrument = false, $previousLastAnswer = null)
     {
         $this->instruments = $instruments;
+        $this->isLastInstrument = $isLastInstrument == 1 ? true : false;
+        $this->previousLastAnswer = $previousLastAnswer;
     }
 
     /**

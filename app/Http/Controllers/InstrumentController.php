@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\Validator;
 
 class InstrumentController extends Controller
 {
+    private const LIMIT = 2;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $instruments = Instrument::with('dimension')->orderBy('numbering')->get();
-        return view('admin.instruments.index',compact('instruments'));
+        return view('admin.instruments.index', compact('instruments'));
     }
 
     /**
@@ -36,7 +37,7 @@ class InstrumentController extends Controller
     {
         $request->validate([
             'content' => 'required|string|max:255',
-            'numbering' => 'required|integer|unique:instruments', 
+            'numbering' => 'required|integer|unique:instruments',
             'reverse' => 'required',
             'dimension' => 'required|in:' .  implode(',', Dimension::pluck('id')->toArray())
         ]);
@@ -67,7 +68,7 @@ class InstrumentController extends Controller
     {
         $request->validate([
             'content' => 'required|string|max:255',
-            'numbering' => 'required|integer|unique:instruments,numbering,' . $instrument->id, 
+            'numbering' => 'required|integer|unique:instruments,numbering,' . $instrument->id,
             'reverse' => 'required',
             'dimension' => 'required|in:' .  implode(',', Dimension::pluck('id')->toArray())
         ]);
@@ -90,34 +91,48 @@ class InstrumentController extends Controller
         return back();
     }
 
-    public function answer() {
-        $instruments = Instrument::orderBy('numbering')->get();
-        $user = Auth::user();
-        return view('guest.instruments.answer', compact('instruments', 'user'));
-    }
+    public function answer(Request $request)
+    {
+        $lastAnswer = $request->lastAnswer;
 
-    public function submitAnswers(Request $request) {
-        $instrument_ids = Instrument::pluck('id')->toArray();
-        $validate_array = [];
-        foreach($instrument_ids as $instrument_id) {
-            $validate_array["answer-$instrument_id"] = "required";
+        if (!($lastAnswer)) {
+            $lastAnswer = 0;
         }
-    
-        $request->validate($validate_array);
 
-        $allRequestWithoutToken = $request->except('_token');
-        $filteredRequest = $this->getValidInput($allRequestWithoutToken);
-        
-        Answer::insert($filteredRequest);
+        $user = Auth::user();
 
-        return back();
+        $instruments = Instrument::with(['answers' => function($query) use($user) {
+            $query->where('user_id', $user->id); // nambahin relasi yang belum submitted
+        }])->where('numbering', '>', $lastAnswer)->limit(self::LIMIT)->orderBy('numbering')->get();
+
+        $isLastInstrument = $instruments->count() === 0;
+
+        return view('guest.instruments.answer', compact('instruments', 'user', 'isLastInstrument'));
     }
 
-    private function getValidInput($validatedRequests): array {
+    public function submitAnswers(Request $request)
+    {
+        $allRequestWithoutUnusedData = $request->except('_token', 'lastAnswer');
+        $filteredAnswers = $this->getValidInput($allRequestWithoutUnusedData);
+
+        foreach($filteredAnswers as $answer) {
+            Answer::updateOrCreate(
+                ['user_id' => $answer['user_id'], 'instrument_id' => $answer['instrument_id']],
+                $answer
+            );
+        }
+
+        $lastAnswer = $request->lastAnswer;
+
+        return redirect()->route('instruments.answer', ['lastAnswer' => $lastAnswer]);
+    }
+
+    private function getValidInput($validatedRequests): array
+    {
         $results = [];
         $user_id = Auth::user()->id;
 
-        foreach($validatedRequests as $key => $value) {
+        foreach ($validatedRequests as $key => $value) {
             $instrumentId = str_replace('answer-', '', $key);
 
             $newArray = [
