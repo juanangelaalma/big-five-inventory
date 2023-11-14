@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Dimension;
 use App\Models\Instrument;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class InstrumentSeeder extends Seeder
@@ -29,7 +28,7 @@ class InstrumentSeeder extends Seeder
             Instrument::create([
                 'dimension_id' => $dimensionIds[$index],
                 'content' => fake()->text(20),
-                'numbering' => $i,
+                'numbering' => $i + 1,
                 'reverse' => array_rand([1, 0])
             ]);
         }

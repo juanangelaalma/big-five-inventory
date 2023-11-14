@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/instruments', [InstrumentController::class, 'answer'])->name('instruments.answer');
     Route::post('/instruments', [InstrumentController::class, 'submitAnswers'])->name('instruments.answer.submit');
-    Route::get('instruments/back', [InstrumentController::class, 'back'])->name('instruments.answer.back');
+    Route::post('/instruments/submitAllAnswers', [InstrumentController::class, 'submitAllAnswers'])->name('instruments.submit.all');
 
     Route::get('/answers', [AnswerController::class, 'result'])->name('answers.result');
 });

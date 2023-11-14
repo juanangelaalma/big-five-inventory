@@ -2,10 +2,14 @@
     <div class="py-12">
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
             @if ($user->hasCompleteProfile())
-                <form action="{{ route('instruments.answer.submit') }}" method="POST">
-                    @csrf
+                @if ($isLastInstrument)
                     <x-guest.answer-form :is-last-instrument="$isLastInstrument" :instruments="$instruments" />
-                </form>
+                @else
+                    <form action="{{ route('instruments.answer.submit') }}" method="POST">
+                        @csrf
+                        <x-guest.answer-form :is-last-instrument="$isLastInstrument" :instruments="$instruments" />
+                    </form>
+                @endif
             @else
                 <x-alert type="warning" message="Mohon lengkapi profil terlebih dahulu" />
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">

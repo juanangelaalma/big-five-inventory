@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\AnswerStatus;
 use App\Models\Dimension;
 use App\Models\Instrument;
 use Illuminate\Http\Request;
@@ -11,7 +12,6 @@ use Illuminate\Support\Facades\Validator;
 
 class InstrumentController extends Controller
 {
-    private const LIMIT = 2;
     /**
      * Display a listing of the resource.
      */
@@ -101,9 +101,11 @@ class InstrumentController extends Controller
 
         $user = Auth::user();
 
-        $instruments = Instrument::with(['answers' => function($query) use($user) {
-            $query->where('user_id', $user->id); // nambahin relasi yang belum submitted
-        }])->where('numbering', '>', $lastAnswer)->limit(self::LIMIT)->orderBy('numbering')->get();
+        $instruments = Instrument::with(['answers' => function ($query) use ($user) {
+            $query->whereHas('answerStatus', function ($query) {
+                $query->where('status', 'pending');
+            })->orWhere('answer_status_id', null)->where('user_id', $user->id); // nambahin relasi yang belum submitted
+        }])->where('numbering', '>', $lastAnswer)->limit(Answer::LIMIT)->orderBy('numbering')->get();
 
         $isLastInstrument = $instruments->count() === 0;
 
@@ -115,9 +117,9 @@ class InstrumentController extends Controller
         $allRequestWithoutUnusedData = $request->except('_token', 'lastAnswer');
         $filteredAnswers = $this->getValidInput($allRequestWithoutUnusedData);
 
-        foreach($filteredAnswers as $answer) {
+        foreach ($filteredAnswers as $answer) {
             Answer::updateOrCreate(
-                ['user_id' => $answer['user_id'], 'instrument_id' => $answer['instrument_id']],
+                ['user_id' => $answer['user_id'], 'instrument_id' => $answer['instrument_id'], 'answer_status_id' => null],
                 $answer
             );
         }
@@ -125,6 +127,22 @@ class InstrumentController extends Controller
         $lastAnswer = $request->lastAnswer;
 
         return redirect()->route('instruments.answer', ['lastAnswer' => $lastAnswer]);
+    }
+
+    public function submitAllAnswers()
+    {
+        $user = Auth::user();
+
+        $answer = Answer::whereHas('answerStatus', function ($query) {
+            $query->where('status', 'pending');
+        })->orWhere('answer_status_id', null)->where('user_id', $user->id)->first();
+
+        if($answer && $answer->answerStatus) {
+            $answer->answerStatus->status = 'done';
+            $answer->answerStatus->save();
+        }
+
+        return redirect()->route('instruments.answer');
     }
 
     private function getValidInput($validatedRequests): array
