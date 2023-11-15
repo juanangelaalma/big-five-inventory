@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -17,7 +19,8 @@ class UserController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
-    public function show(User $user) {
+    public function show(User $user)
+    {
         return view('admin.users.details', compact('user'));
     }
 
@@ -55,12 +58,35 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name' => 'required|max:255',
-            'role' => 'required|in:' . implode(',', User::ROLES)
+            'name' => ['nullable', 'string', 'max:255'],
+            'email' => ['nullable', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
+            'role' => 'required|in:' . implode(',', User::ROLES),
+            'student_number' => ['nullable', 'string', 'max:50', Rule::unique(Profile::class)->ignore($user->id, 'user_id')],
+            'batch' => ['nullable', 'integer'],
+            'major' => ['nullable', 'string', 'max:100'],
+            'gender' => ['nullable', 'string', 'in:male,female'],
+            'birth_location' => ['nullable', 'string', 'max:100'],
+            'birth_date' => ['nullable', 'date'],
+            'ethnicity' => ['nullable', 'string', 'max:100'],
         ]);
+
+        $profile = Profile::firstOrCreate(
+            ['user_id' => $user->id],
+        );
 
         $user->name = $request->name;
         $user->role = $request->role;
+
+        $profile->student_number = $request->student_number;
+        $profile->batch = $request->batch;
+        $profile->major = $request->major;
+        $profile->gender = $request->gender;
+        $profile->birth_location = $request->birth_location;
+        $profile->birth_date = $request->birth_date;
+        $profile->ethnicity = $request->ethnicity;
+
+        $profile->save();
+
         $user->save();
 
         return back();

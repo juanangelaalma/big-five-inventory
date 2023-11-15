@@ -17,7 +17,8 @@ class Profile extends Model
         'gender',
         'birth_location',
         'birth_date',
-        'ethnicity'
+        'ethnicity',
+        'user_id'
     ];
 
     public function user() {
