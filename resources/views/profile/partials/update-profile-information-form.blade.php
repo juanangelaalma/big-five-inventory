@@ -1,4 +1,4 @@
-<section>
+<section class="w-full">
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('Profile Information') }}
@@ -8,10 +8,6 @@
             {{ __("Update your account's profile information and email address.") }}
         </p>
     </header>
-
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
-
-    <x-guest.update-profile-form :user="$user" />
+        <x-guest.update-profile-form :user="$user" />
+    </div>
 </section>

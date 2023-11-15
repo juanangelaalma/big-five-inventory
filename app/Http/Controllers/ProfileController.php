@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -35,9 +36,20 @@ class ProfileController extends Controller
 
         $profile = Profile::where('user_id', $request->user()->id)->first();
 
-        if(!$profile) {
+        if (!$profile) {
             $profile = new Profile();
             $profile->user_id = $request->user()->id;
+        }
+
+        if ($request->file('profilePicture')) {
+            $request->validate([
+                'profilePicture'  => 'mimes:png,jpg,jpeg,webp|max:2048',
+            ]);
+
+            $fileName = time() . '.' . $request->file('profilePicture')->extension();
+            $request->file('profilePicture')->storeAs('/uploads/users/', $fileName, 'public');
+
+            $profile->profile_picture = '/storage/uploads/users/' . $fileName;
         }
 
         $profile->student_number = $request->student_number;

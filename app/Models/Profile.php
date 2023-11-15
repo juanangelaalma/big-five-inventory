@@ -18,7 +18,8 @@ class Profile extends Model
         'birth_location',
         'birth_date',
         'ethnicity',
-        'user_id'
+        'user_id',
+        'profile_picture'
     ];
 
     public function user() {

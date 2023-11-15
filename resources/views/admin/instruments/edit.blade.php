@@ -1,4 +1,4 @@
-<x-admin-layout pageTitle="Tambah Instrumen">
+<x-admin-layout pageTitle="Edit Instrumen">
   <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
       <!-- Validation inputs -->
       <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -21,7 +21,7 @@
               </x-text-select>
               <div class="w-full lg:w-[100px]">
                   <x-guest.primary-button type="submit" class="mt-6">
-                      Buat
+                      Simpan
                   </x-guest.primary-button>
               </div>
           </form>
