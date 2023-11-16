@@ -24,7 +24,7 @@
                     value="{{ avoidNullError($user->profile, 'batch') }}" />
             </div>
             <div class="w-full lg:w-1/2 lg:px-1">
-                <x-text-input disabled label="Jurusan"
+                <x-text-input disabled label="Prodi"
                     value="{{ avoidNullError($user->profile, 'major') }}" />
             </div>
             <div class="w-full lg:w-1/2 lg:px-1">
