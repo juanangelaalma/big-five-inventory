@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/instruments/submitAllAnswers', [InstrumentController::class, 'submitAllAnswers'])->name('instruments.submit.all');
 
     Route::get('/answers', [AnswerController::class, 'result'])->name('answers.result');
+    Route::get('/answers/{answerStatusId}', [AnswerController::class, 'resultDetails'])->name('answers.result.details');
 });
 
 Route::prefix('admin')->middleware(['auth', 'roles:admin'])->group(function () {
@@ -52,13 +53,13 @@ Route::prefix('admin')->middleware(['auth', 'roles:admin'])->group(function () {
     });
 });
 
-Route::prefix('counselor')->middleware(['auth', 'roles:counselor'])->group(function() {
+Route::prefix('counselor')->middleware(['auth', 'roles:counselor'])->group(function () {
     Route::get('/', [DashboardController::class, 'counselor'])->name('counselor.index');
 
     Route::get('/answers', [AnswerController::class, 'getUsersWithAnswers'])->name('counselor.answers');
 });
 
-Route::get('/test-component', function() {
+Route::get('/test-component', function () {
     return view(request()->component);
 });
 

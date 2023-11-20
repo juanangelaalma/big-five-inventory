@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Auth;
 class Answer extends Model
 {
     use HasFactory;
+    use \Znck\Eloquent\Traits\BelongsToThrough;
 
     protected $fillable = ['user_id', 'instrument_id', 'score'];
 
-    public const LIMIT = 5;
+    public const LIMIT = 3;
 
     public function user() {
         return $this->belongsTo(User::class);
@@ -20,6 +21,10 @@ class Answer extends Model
 
     public function instrument() {
         return $this->belongsTo(Instrument::class);
+    }
+
+    public function dimension() {
+        return $this->belongsToThrough(Dimension::class, Instrument::class);
     }
 
     public function answerStatus() {
