@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class AnswerStatus extends Model
 {
     use HasFactory;
+    use \Znck\Eloquent\Traits\BelongsToThrough;
 
     protected $fillable = ['status'];
 
-    public function answers() {
+    public function answers()
+    {
         return $this->hasMany(Answer::class);
     }
 }

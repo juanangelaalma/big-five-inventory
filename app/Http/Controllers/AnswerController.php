@@ -23,31 +23,110 @@ class AnswerController extends Controller
         return view('guest.answers.result', compact('answers'));
     }
 
+    private function getAnswerWithQuestion($answerStatusId)
+    {
+        return Answer::with(['instrument' => function ($query) {
+            $query->with(['dimension' => function ($query) {
+                $query->select('id', 'name');
+            }])->select('id', 'dimension_id', 'reverse');
+        }])->where('answer_status_id', $answerStatusId)->get();
+    }
+
+    private function calculateResults($answersWithQuestion)
+    {
+        $invertedAnswers = BFIService::correctInvertedAnswer($answersWithQuestion);
+        $groupedAnswer = BFIService::groupAnswerByDimension($invertedAnswers);
+        $results = BFIService::calculateByDimension($groupedAnswer);
+        $results = BFIService::orderByDimension($results);
+        return $results;
+    }
+
     public function resultDetails($answerStatusId)
     {
         $user = Auth::user();
         $answer_status = AnswerStatus::find($answerStatusId);
         $answered_at = $answer_status->updated_at;
-        
-        $dimensions = Dimension::orderBy('order')->pluck('name');
-        
-        $answersWithQuestion = Answer::with(['instrument' => function ($query) {
-            $query->with(['dimension' => function ($query) {
-                $query->select('id', 'name');
-            }])->select('id', 'dimension_id', 'reverse');
-        }])->where('answer_status_id', $answer_status->id)->get();
 
-        $invertedAnswers = BFIService::correctInvertedAnswer($answersWithQuestion);
-        $groupedAnswer = BFIService::groupAnswerByDimension($invertedAnswers);
-        $results = BFIService::calculateByDimension($groupedAnswer);
-        $results = BFIService::orderByDimension($results);
+        $answersWithQuestion = $this->getAnswerWithQuestion($answer_status->id);
+
+        $results = $this->calculateResults($answersWithQuestion);
 
         return view('guest.answers.details', compact('user', 'answered_at', 'results'));
     }
 
-    public function getUsersWithAnswers()
+    public function resultDetailsForCounselor($answerStatusId)
     {
-        $users = User::with('profile')->get();
-        return view('counselor.answers.index', compact('users'));
+        $answer_status = AnswerStatus::find($answerStatusId);
+        $user = $answer_status->answers[0]->user;
+        $answered_at = $answer_status->updated_at;
+
+        $answersWithQuestion = $this->getAnswerWithQuestion($answer_status->id);
+
+        $results = $this->calculateResults($answersWithQuestion);
+
+        return view('counselor.answers.details', compact('answered_at', 'results', 'user'));
+    }
+
+    public function getUsersWithAnswers(Request $request)
+    {
+        $start_date = $request->query('start_date');
+        $end_date = $request->query('end_date');
+        $major = $request->query('major');
+        $gender = $request->query('gender');
+
+        $answer_statuses = AnswerStatus::with(['answers' => function ($query) {
+            $query->with(['user' => function ($query) {
+                $query->with('profile');
+            }]);
+        }]);
+
+        if ($start_date) {
+            $answer_statuses = $answer_statuses->where('created_at', '>', $start_date . ' 00:00:01');
+        }
+
+        if ($end_date) {
+            $answer_statuses = $answer_statuses->where('created_at', '<', $end_date . ' 23:59:59');
+        }
+
+        if ($major) {
+            $answer_statuses = $answer_statuses->whereHas('answers', function ($query) use ($major) {
+                $query->whereHas('user', function ($query) use ($major) {
+                    $query->whereHas('profile', function ($query) use ($major) {
+                        $query->where('major', 'LIKE', "%$major%");
+                    });
+                });
+            });
+        }
+
+        if ($gender) {
+            $answer_statuses = $answer_statuses->whereHas('answers', function ($query) use ($gender) {
+                $query->whereHas('user', function ($query) use ($gender) {
+                    $query->whereHas('profile', function ($query) use ($gender) {
+                        $query->where('gender', $gender);
+                    });
+                });
+            });
+        }
+
+        $answer_statuses = $answer_statuses->get();
+
+        return view('counselor.answers.index', compact('answer_statuses', 'start_date', 'end_date', 'major', 'gender'));
+    }
+
+    public function filter(Request $request)
+    {
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        $major = $request->major;
+        $gender = $request->gender;
+
+        $params = [
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'major' => $major,
+            'gender' => $gender,
+        ];
+
+        return redirect()->route('counselor.answers', $params);
     }
 }

@@ -57,6 +57,8 @@ Route::prefix('counselor')->middleware(['auth', 'roles:counselor'])->group(funct
     Route::get('/', [DashboardController::class, 'counselor'])->name('counselor.index');
 
     Route::get('/answers', [AnswerController::class, 'getUsersWithAnswers'])->name('counselor.answers');
+    Route::get('/answers/{answerStatusId}', [AnswerController::class, 'resultDetailsForCounselor'])->name('counselor.answers.details');
+    Route::post('/answers/filter', [AnswerController::class, 'filter'])->name('counselor.answers.filter');
 });
 
 Route::get('/test-component', function () {
