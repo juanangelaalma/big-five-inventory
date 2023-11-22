@@ -28,9 +28,9 @@ class CompletenessSidebar extends Component
 
         $instruments_id_numberings = Instrument::orderBy('numbering')->get(['id', 'numbering']);
 
-        $instruments_ids_answered_by_user = Answer::whereHas('answerStatus', function ($query) {
+        $instruments_ids_answered_by_user = Answer::where('user_id', $user->id)->whereHas('answerStatus', function ($query) {
             $query->where('status', 'pending');
-        })->orWhere('answer_status_id', null)->where('user_id', $user->id)->pluck('instrument_id')->toArray();
+        })->orWhere('answer_status_id', null)->pluck('instrument_id')->toArray();
 
         $button_statuses = [];
 

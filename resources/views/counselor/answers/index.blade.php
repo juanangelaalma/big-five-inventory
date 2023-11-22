@@ -54,29 +54,31 @@
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                     @foreach ($answer_statuses as $answer_status)
-                        <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3 text-sm">
-                                {{ $answer_status->answers[0]->user->email }}
-                            </td>
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <p class="font-semibold">{{ $answer_status->answers[0]->user->name }}</p>
-                                </div>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ translateGender(avoidNullError($answer_status->answers[0]->user->profile, 'gender')) }}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ avoidNullError($answer_status->answers[0]->user->profile, 'major') }}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ $answer_status->created_at }}
-                            </td>
-                            <td class="px-4 py-3 flex space-x-2">
-                                <a href="{{ route('counselor.answers.details', $answer_status->id) }}"
-                                    class="text-sm bg-green-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-green-500 transition-colors duration-200">Hasil</a>
-                            </td>
-                        </tr>
+                        @if ($answer_status->answers->count() > 0)
+                            <tr class="text-gray-700 dark:text-gray-400">
+                                <td class="px-4 py-3 text-sm">
+                                    {{ $answer_status->answers[0]->user->email }}
+                                </td>
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center text-sm">
+                                        <p class="font-semibold">{{ $answer_status->answers[0]->user->name }}</p>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{ translateGender(avoidNullError($answer_status->answers[0]->user->profile, 'gender')) }}
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{ avoidNullError($answer_status->answers[0]->user->profile, 'major') }}
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{ $answer_status->created_at }}
+                                </td>
+                                <td class="px-4 py-3 flex space-x-2">
+                                    <a href="{{ route('counselor.answers.details', $answer_status->id) }}"
+                                        class="text-sm bg-green-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-green-500 transition-colors duration-200">Hasil</a>
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>

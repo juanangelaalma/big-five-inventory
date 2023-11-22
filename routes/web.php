@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalystController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\InstrumentController;
@@ -59,6 +60,8 @@ Route::prefix('counselor')->middleware(['auth', 'roles:counselor'])->group(funct
     Route::get('/answers', [AnswerController::class, 'getUsersWithAnswers'])->name('counselor.answers');
     Route::get('/answers/{answerStatusId}', [AnswerController::class, 'resultDetailsForCounselor'])->name('counselor.answers.details');
     Route::post('/answers/filter', [AnswerController::class, 'filter'])->name('counselor.answers.filter');
+
+    Route::get('/analyst', [AnalystController::class, 'index'])->name('counselor.analyst');
 });
 
 Route::get('/test-component', function () {

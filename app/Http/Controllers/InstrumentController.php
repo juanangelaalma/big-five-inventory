@@ -102,9 +102,9 @@ class InstrumentController extends Controller
         $user = Auth::user();
 
         $instruments = Instrument::with(['answers' => function ($query) use ($user) {
-            $query->whereHas('answerStatus', function ($query) {
+            $query->where('user_id', $user->id)->whereHas('answerStatus', function ($query) {
                 $query->where('status', 'pending');
-            })->orWhere('answer_status_id', null)->where('user_id', $user->id); // nambahin relasi yang belum submitted
+            })->orWhere('answer_status_id', null); // nambahin relasi yang belum submitted
         }])->where('numbering', '>', $lastAnswer)->limit(Answer::LIMIT)->orderBy('numbering')->get();
 
         $isLastInstrument = $instruments->count() === 0;

@@ -57,7 +57,7 @@ class AnswerController extends Controller
     public function resultDetailsForCounselor($answerStatusId)
     {
         $answer_status = AnswerStatus::find($answerStatusId);
-        $user = $answer_status->answers[0]->user;
+        $user = $answer_status->answers->count() > 0 ? $answer_status->answers[0]->user : null;
         $answered_at = $answer_status->updated_at;
 
         $answersWithQuestion = $this->getAnswerWithQuestion($answer_status->id);
