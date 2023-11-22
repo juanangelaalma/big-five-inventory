@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnalystController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\DimensionController;
 use App\Http\Controllers\InstrumentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -42,6 +43,15 @@ Route::prefix('admin')->middleware(['auth', 'roles:admin'])->group(function () {
         Route::get('/{user:id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
         Route::put('/{user:id}/update', [UserController::class, 'update'])->name('admin.users.update');
         Route::post('/{user:id}/destroy', [UserController::class, 'destroy'])->name('admin.users.destroy');
+    });
+
+    Route::prefix('dimensions')->group(function () {
+        Route::get('/', [DimensionController::class, 'index'])->name('admin.dimensions');
+        Route::get('/create', [DimensionController::class, 'create'])->name('admin.dimensions.create');
+        Route::post('/store', [DimensionController::class, 'store'])->name('admin.dimensions.store');
+        Route::get('/{dimension:id}/edit', [DimensionController::class, 'edit'])->name('admin.dimensions.edit');
+        Route::put('/{dimension:id}/update', [DimensionController::class, 'update'])->name('admin.dimensions.update');
+        Route::post('/{dimension:id}/destroy', [DimensionController::class, 'destroy'])->name('admin.dimensions.destroy');
     });
 
     Route::prefix('instruments')->group(function () {

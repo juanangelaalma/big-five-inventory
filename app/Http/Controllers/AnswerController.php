@@ -27,7 +27,7 @@ class AnswerController extends Controller
     {
         return Answer::with(['instrument' => function ($query) {
             $query->with(['dimension' => function ($query) {
-                $query->select('id', 'name');
+                $query->select('id', 'name', 'low_percentile_description', 'high_percentile_description');
             }])->select('id', 'dimension_id', 'reverse');
         }])->where('answer_status_id', $answerStatusId)->get();
     }

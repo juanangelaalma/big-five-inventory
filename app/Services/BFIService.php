@@ -45,10 +45,16 @@ class BFIService
   }
 
   public static function orderByDimension($calculatedResults) {
-    $dimensions = Dimension::orderBy('order', 'ASC')->pluck('name');
+    $dimensions = Dimension::orderBy('order', 'ASC')->get(['name', 'low_percentile_description', 'high_percentile_description']);
     $results = [];
     foreach($dimensions as $dimension) {
-      $results[$dimension] = $calculatedResults[$dimension];
+      if(isset($calculatedResults[$dimension->name])) {
+        $results[$dimension->name] = [
+          'low_percentile_description' => $dimension->low_percentile_description,
+          'high_percentile_description' => $dimension->high_percentile_description,
+          'total' => $calculatedResults[$dimension->name]
+        ];
+      }
     }
     return $results;
   }

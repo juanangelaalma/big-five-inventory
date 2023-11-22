@@ -18,7 +18,7 @@
                 </td>
                 <td class="px-4 py-3">
                     <div class="flex items-center text-sm">
-                        <p class="font-semibold">{{ $result }}</p>
+                        <p class="font-semibold">{{ $result['total'] }}</p>
                     </div>
                 </td>
             </tr>

@@ -9,5 +9,5 @@ class Dimension extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'order'];
+    protected $fillable = ['name', 'order', 'low_percentile_description', 'high_percentile_description'];
 }
