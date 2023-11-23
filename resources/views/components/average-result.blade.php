@@ -1,6 +1,6 @@
 <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
     <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-        Rata-rate hasil analisis
+        Rata-rata hasil analisis
     </h4>
     <table class="w-full whitespace-no-wrap">
         <thead>
@@ -11,18 +11,34 @@
             </tr>
         </thead>
         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+            @php
+                $sum = 0
+            @endphp
             @foreach ($results as $dimension => $result)
-            <tr class="text-gray-700 dark:text-gray-400">
-                <td class="px-4 py-3 text-sm">
-                    {{ $dimension }}
+                <tr class="text-gray-700 dark:text-gray-400">
+                    <td class="px-4 py-3 text-sm">
+                        {{ $dimension }}
+                    </td>
+                    <td class="px-4 py-3">
+                        <div class="flex items-center text-sm">
+                            <p class="font-semibold">{{ $result['total'] }}</p>
+                        </div>
+                    </td>
+                </tr>
+                @php
+                    $sum += $result['total']
+                @endphp
+            @endforeach
+            <tr class="text-gray-700 dark:text-gray-400 border-t-gray-400">
+                <td class="px-4 py-3 text-sm font-semibold">
+                    Hasil
                 </td>
                 <td class="px-4 py-3">
                     <div class="flex items-center text-sm">
-                        <p class="font-semibold">{{ $result['total'] }}</p>
+                        <p class="font-semibold">{{ $sum / count($results) }}</p>
                     </div>
                 </td>
             </tr>
-            @endforeach
         </tbody>
     </table>
 </div>

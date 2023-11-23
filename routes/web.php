@@ -68,6 +68,7 @@ Route::prefix('admin')->middleware(['auth', 'roles:admin'])->group(function () {
     Route::post('/answers/filter', [AnswerController::class, 'filter'])->name('admin.answers.filter');
 
     Route::get('/analyst', [AnalystController::class, 'index'])->name('admin.analyst');
+    Route::post('/analyst/filter', [AnalystController::class, 'filter'])->name('admin.analyst.filter');
 });
 
 Route::prefix('counselor')->middleware(['auth', 'roles:counselor'])->group(function () {
@@ -78,6 +79,7 @@ Route::prefix('counselor')->middleware(['auth', 'roles:counselor'])->group(funct
     Route::post('/answers/filter', [AnswerController::class, 'filter'])->name('counselor.answers.filter');
 
     Route::get('/analyst', [AnalystController::class, 'index'])->name('counselor.analyst');
+    Route::post('/analyst/filter', [AnalystController::class, 'filter'])->name('counselor.analyst.filter');
 });
 
 Route::get('/test-component', function () {

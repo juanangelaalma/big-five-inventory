@@ -1,12 +1,15 @@
 <x-admin-layout pageTitle="Analisis">
-    <x-slot name="head">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
-        <script src="{{ asset('js/charts-lines.js') }}" defer></script>
-        <script src="{{ asset('js/charts-pie.js') }}" defer></script>
-        <script src="{{ asset('js/charts-bars.js') }}" defer></script>
-    </x-slot>
+    <div class="w-full">
+        <x-slot name="head">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
+            <script src="{{ asset('js/charts-lines.js') }}" defer></script>
+            <script src="{{ asset('js/charts-pie.js') }}" defer></script>
+            <script src="{{ asset('js/charts-bars.js') }}" defer></script>
+        </x-slot>
+    </div>
     <div class="grid gap-6 mb-8 md:grid-cols-2">
+        <x-filter-result :dateonly="true" action="{{ route('admin.analyst.filter') }}" />
         <x-gender-chart />
         <!-- Bars chart -->
         <x-average-result />
