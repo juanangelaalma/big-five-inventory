@@ -10,6 +10,8 @@ class AnalystController extends Controller
 {
     public function index()
     {
-        return view('counselor.analyst.index');
+        $level = getPathLevel(); 
+
+        return view("$level.analyst.index");
     }
 }

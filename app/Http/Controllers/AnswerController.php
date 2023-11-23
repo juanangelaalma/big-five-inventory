@@ -54,7 +54,7 @@ class AnswerController extends Controller
         return view('guest.answers.details', compact('user', 'answered_at', 'results'));
     }
 
-    public function resultDetailsForCounselor($answerStatusId)
+    public function resultDetailsForAdminAndCounselor($answerStatusId)
     {
         $answer_status = AnswerStatus::find($answerStatusId);
         $user = $answer_status->answers->count() > 0 ? $answer_status->answers[0]->user : null;
@@ -64,7 +64,9 @@ class AnswerController extends Controller
 
         $results = $this->calculateResults($answersWithQuestion);
 
-        return view('counselor.answers.details', compact('answered_at', 'results', 'user'));
+        $level = getPathLevel();
+
+        return view("$level.answers.details", compact('answered_at', 'results', 'user'));
     }
 
     public function getUsersWithAnswers(Request $request)
@@ -110,7 +112,9 @@ class AnswerController extends Controller
 
         $answer_statuses = $answer_statuses->get();
 
-        return view('counselor.answers.index', compact('answer_statuses', 'start_date', 'end_date', 'major', 'gender'));
+        $level = getPathLevel();
+
+        return view("$level.answers.index", compact('answer_statuses', 'start_date', 'end_date', 'major', 'gender'));
     }
 
     public function filter(Request $request)
@@ -127,6 +131,8 @@ class AnswerController extends Controller
             'gender' => $gender,
         ];
 
-        return redirect()->route('counselor.answers', $params);
+        $level = getPathLevel();
+
+        return redirect()->route("$level.answers", $params);
     }
 }

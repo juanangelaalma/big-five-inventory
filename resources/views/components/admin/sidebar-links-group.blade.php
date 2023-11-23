@@ -34,12 +34,22 @@
             </path>
         </svg>
     </x-admin.sidebar-link>
-    <x-admin.sidebar-link href="" title="Hasil Analisis"
-        active="{{ request()->is('admin/instruments*') ? 'active' : '' }}">
+    <x-admin.sidebar-link href="{{ route('admin.analyst') }}" title="Hasil Analisis"
+    active="{{ request()->is('admin/analyst*') ? 'active' : '' }}">
         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
             stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
             <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
             <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
         </svg>
+    </x-admin.sidebar-link>
+    <x-admin.sidebar-link href="{{ route('admin.answers') }}" title="Hasil Pengisian"
+    active="{{ request()->is('admin/answers*') ? 'active' : '' }}">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+        <g fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M10 9h4m-4 7h12m-12 4h12m-12 4h4m-6 5h16a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v22a2 2 0 0 0 2 2Z" />
+            <circle cx="22" cy="9" r=".5" fill="currentColor" />
+        </g>
+    </svg>
     </x-admin.sidebar-link>
 </ul>

@@ -62,13 +62,19 @@ Route::prefix('admin')->middleware(['auth', 'roles:admin'])->group(function () {
         Route::put('/{instrument:id}/update', [InstrumentController::class, 'update'])->name('admin.instruments.update');
         Route::post('/{instrument:id}/destroy', [InstrumentController::class, 'destroy'])->name('admin.instruments.destroy');
     });
+
+    Route::get('/answers', [AnswerController::class, 'getUsersWithAnswers'])->name('admin.answers');
+    Route::get('/answers/{answerStatusId}', [AnswerController::class, 'resultDetailsForAdminAndCounselor'])->name('admin.answers.details');
+    Route::post('/answers/filter', [AnswerController::class, 'filter'])->name('admin.answers.filter');
+
+    Route::get('/analyst', [AnalystController::class, 'index'])->name('admin.analyst');
 });
 
 Route::prefix('counselor')->middleware(['auth', 'roles:counselor'])->group(function () {
     Route::get('/', [DashboardController::class, 'counselor'])->name('counselor.index');
 
     Route::get('/answers', [AnswerController::class, 'getUsersWithAnswers'])->name('counselor.answers');
-    Route::get('/answers/{answerStatusId}', [AnswerController::class, 'resultDetailsForCounselor'])->name('counselor.answers.details');
+    Route::get('/answers/{answerStatusId}', [AnswerController::class, 'resultDetailsForAdminAndCounselor'])->name('counselor.answers.details');
     Route::post('/answers/filter', [AnswerController::class, 'filter'])->name('counselor.answers.filter');
 
     Route::get('/analyst', [AnalystController::class, 'index'])->name('counselor.analyst');
