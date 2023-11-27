@@ -28,7 +28,7 @@
                     <tr>
                         <td style="padding-top: 0.25rem; width: 40%;">Tanggal lahir</td>
                         <td style="padding-top: 0.25rem; width: 2%;"> : </td>
-                        <td style="padding-top: 0.25rem; width: 50%;"> {{ $user->profile->birth_date }} </td>
+                        <td style="padding-top: 0.25rem; width: 50%;"> {{ avoidNullError($user->profile, 'birth_date') }} </td>
                     </tr>
                     <tr>
                         <td style="padding-top: 0.25rem; width: 40%;">Pendidikan</td>
@@ -52,7 +52,7 @@
                     <tr>
                         <td style="padding-top: 0.25rem; width: 40%;">Prodi</td>
                         <td style="padding-top: 0.25rem; width: 2%;"> : </td>
-                        <td style="padding-top: 0.25rem; width: 50%;"> {{ $user->profile->major }} </td>
+                        <td style="padding-top: 0.25rem; width: 50%;"> {{ avoidNullError($user->profile, 'major') }} </td>
                     </tr>
                 </table>
             </div>

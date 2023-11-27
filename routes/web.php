@@ -68,6 +68,7 @@ Route::prefix('admin')->middleware(['auth', 'roles:admin'])->group(function () {
     Route::get('/answers', [AnswerController::class, 'getUsersWithAnswers'])->name('admin.answers');
     Route::get('/answers/{answerStatusId}', [AnswerController::class, 'resultDetailsForAdminAndCounselor'])->name('admin.answers.details');
     Route::post('/answers/filter', [AnswerController::class, 'filter'])->name('admin.answers.filter');
+    Route::get('/answers/{answerStatusId}/pdf', [PDFController::class, 'downloadResult'])->name('answers.result.details.pdf');
 
     Route::get('/analyst', [AnalystController::class, 'index'])->name('admin.analyst');
     Route::post('/analyst/filter', [AnalystController::class, 'filter'])->name('admin.analyst.filter');
@@ -79,7 +80,8 @@ Route::prefix('counselor')->middleware(['auth', 'roles:counselor'])->group(funct
     Route::get('/answers', [AnswerController::class, 'getUsersWithAnswers'])->name('counselor.answers');
     Route::get('/answers/{answerStatusId}', [AnswerController::class, 'resultDetailsForAdminAndCounselor'])->name('counselor.answers.details');
     Route::post('/answers/filter', [AnswerController::class, 'filter'])->name('counselor.answers.filter');
-
+    Route::get('/answers/{answerStatusId}/pdf', [PDFController::class, 'downloadResult'])->name('answers.result.details.pdf');
+    
     Route::get('/analyst', [AnalystController::class, 'index'])->name('counselor.analyst');
     Route::post('/analyst/filter', [AnalystController::class, 'filter'])->name('counselor.analyst.filter');
 });
