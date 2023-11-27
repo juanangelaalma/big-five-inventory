@@ -1,10 +1,11 @@
-@props(['user', 'answered_at', 'results'])
+@props(['user', 'answered_at', 'results', 'hidepdfdownload' => false])
 
 <div class="py-12 bg-white">
-    <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <div class="mx-auto px-6 lg:px-8">
         <div class="flex flex-row mb-2">
             <h1 class="text-2xl font-semibold">Hasil Tes Kepribadian</h1>
-            <a href=""
+            @if (!$hidepdfdownload)
+            <a href="{{ request()->getRequestUri() . '/pdf' }}"
                 class="flex ml-auto mr-0 justify-center items-end space-x-2 px-4 py-2 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <g fill="none" fill-rule="evenodd">
@@ -16,6 +17,7 @@
                 </svg>
                 <span>PDF</span>
             </a>
+            @endif
         </div>
         <hr class="w-full">
         <div class="w-full overflow-hidden rounded-lg shadow-xs mt-4 flex flex-col lg:flex-row">

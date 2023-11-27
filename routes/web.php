@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\DimensionController;
 use App\Http\Controllers\InstrumentController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/answers', [AnswerController::class, 'result'])->name('answers.result');
     Route::get('/answers/{answerStatusId}', [AnswerController::class, 'resultDetails'])->name('answers.result.details');
+    Route::get('/answers/{answerStatusId}/pdf', [PDFController::class, 'downloadResult'])->name('answers.result.details.pdf');
 });
 
 Route::prefix('admin')->middleware(['auth', 'roles:admin'])->group(function () {

@@ -20,11 +20,13 @@
     <div {!! $attributes->merge([
         'class' => 'min-h-screen bg-gray-100 dark:bg-gray-900',
     ]) !!}>
+        @if (!$hidenavbar)
         <div class="w-full bg-white border-b-[1px]">
             <div class="container flex flex-col bg-white px-6 mx-auto max-w-6xl mx-auto">
                 <x-guest.navbar />
             </div>
         </div>
+        @endif
         {{-- @include('layouts.navigation') --}}
 
         <!-- Page Heading -->
