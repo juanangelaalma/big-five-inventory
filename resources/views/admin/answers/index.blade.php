@@ -1,4 +1,4 @@
-<x-admin-layout pageTitle="Hasil Pengisian">
+<x-admin-layout pageTitle="Hasil Prediksi">
   <x-filter-result
   :startdate="$start_date"
   :enddate="$end_date"

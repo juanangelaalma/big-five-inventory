@@ -42,7 +42,7 @@
             <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
         </svg>
     </x-admin.sidebar-link>
-    <x-admin.sidebar-link href="{{ route('admin.answers') }}" title="Hasil Pengisian"
+    <x-admin.sidebar-link href="{{ route('admin.answers') }}" title="Hasil Prediksi"
     active="{{ request()->is('admin/answers*') ? 'active' : '' }}">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
         <g fill="none" stroke="currentColor">

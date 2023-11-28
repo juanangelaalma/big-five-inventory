@@ -16,7 +16,7 @@
                 clip-rule="evenodd" />
         </svg>
     </x-counselor.sidebar-link>
-    <x-counselor.sidebar-link href="{{ route('counselor.answers') }}" title="Hasil Pengisian"
+    <x-counselor.sidebar-link href="{{ route('counselor.answers') }}" title="Hasil Prediksi"
         active="{{ request()->is('counselor.answers') ? 'active' : '' }}">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
             <g fill="none" stroke="currentColor">
