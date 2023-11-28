@@ -1,7 +1,7 @@
 /**
  * For usage, visit Chart.js docs https://www.chartjs.org/docs/latest/
  */
-const pieConfig = {
+const pieGenderConfig = {
     type: "doughnut",
     data: {
         datasets: [
@@ -31,9 +31,9 @@ const pieConfig = {
 };
 
 // change this to the id of your chart element in HMTL
-const pieCtx = document.getElementById("genderChart");
-const pieData = pieCtx.getAttribute("dataset").split(",");
-const pieLabel = pieCtx.getAttribute("labels").split(",");
-pieConfig.data.labels = pieLabel;
-pieConfig.data.datasets[0].data = pieData;
-window.myPie = new Chart(pieCtx, pieConfig);
+const pieGenderCtx = document.getElementById("genderChart");
+const pieGenderData = pieGenderCtx.getAttribute("dataset").split(",");
+const pieGenderLabel = pieGenderCtx.getAttribute("labels").split(",");
+pieGenderConfig.data.labels = pieGenderLabel;
+pieGenderConfig.data.datasets[0].data = pieGenderData;
+window.myPie = new Chart(pieGenderCtx, pieGenderConfig);
