@@ -31,8 +31,8 @@ class PDFController extends Controller
 
     public function downloadResult($answerStatusId)
     {
-        $user = Auth::user();
         $answer_status = AnswerStatus::find($answerStatusId);
+        $user = $answer_status->user();
         $answered_at = $answer_status->updated_at;
 
         $answersWithQuestion = $this->getAnswerWithQuestion($answer_status->id);
@@ -45,6 +45,5 @@ class PDFController extends Controller
 
         $pdf->loadView('pdf.result', compact('user', 'answered_at', 'results'))->setPaper('f4', 'landscape')->setWarnings(false);
         return $pdf->download('result.pdf');
-        // return view('pdf.result', compact('user', 'answered_at', 'results'));
     }
 }

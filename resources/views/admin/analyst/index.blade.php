@@ -8,6 +8,8 @@
             <script src="{{ asset('js/charts-result.js') }}" defer></script>
             <script src="{{ asset('js/charts-age.js') }}" defer></script>
             <script src="{{ asset('js/charts-batch.js') }}" defer></script>
+            <script src="{{ asset('js/charts-major.js') }}" defer></script>
+            <script src="{{ asset('js/charts-birth-location.js') }}" defer></script>
         </x-slot>
     </div>
     <x-filter-analyst action="{{ route('admin.analyst.filter') }}" />
@@ -17,5 +19,7 @@
         <x-average-bar />
         <x-age-chart />
         <x-batch-chart />
+        <x-major-chart />
+        <x-birth-location-chart />
     </div>
 </x-admin-layout>

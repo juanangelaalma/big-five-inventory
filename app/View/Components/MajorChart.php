@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
-class BatchChart extends Component
+class MajorChart extends Component
 {
     /**
      * Create a new component instance.
@@ -23,24 +23,25 @@ class BatchChart extends Component
      */
     public function render(): View|Closure|string
     {
-        $batchs = User::whereHas('answers', function ($query) {
+        $majors = User::whereHas('answers', function ($query) {
             $query->whereHas('answerStatus', function ($query) {
                 $query->where('status', 'done');
             });
         })->join('profiles', 'profiles.user_id', 'users.id')
-            ->select(DB::raw('count(users.id) as total, profiles.batch as batch'))
-            ->groupBy('profiles.batch')->get(['batch', 'total']);
+            ->select(DB::raw('count(users.id) as total, profiles.major as major'))
+            ->groupBy('profiles.major')->get(['major', 'total']);
 
-        $batchLabels = [];
-        $batchsTotal = [];
+        $majorLabels = [];
+        $majorsTotal = [];
 
-        foreach ($batchs as $batch) {
-            $batchLabels[] = $batch->batch;
-            $batchsTotal[] = $batch->total;
+        foreach ($majors as $major) {
+            $majorLabels[] = $major->major;
+            $majorsTotal[] = $major->total;
         }
 
-        $batchLabels = implode(",", $batchLabels);
-        $batchsTotal = implode(",", $batchsTotal);
-        return view('components.batch-chart', compact('batchLabels', 'batchsTotal'));
+        $majorLabels = implode(",", $majorLabels);
+        $majorsTotal = implode(",", $majorsTotal);
+        
+        return view('components.major-chart', compact('majorLabels', 'majorsTotal'));
     }
 }

@@ -35,8 +35,16 @@ class AgeChart extends Component
         ->groupBy('age')
         ->get(['age', 'total']);
 
-        $ageLabels = $ages->count() > 0 ? implode(",", [$ages[0]->age, $ages->count() > 1 ? $ages[1]->age : ""]) : "0,0";
-        $agesTotal = $ages->count() > 0 ? implode(",", [$ages[0]->total, $ages->count() > 1 ? $ages[1]->total : "0"]) : "0,0";
+        $ageLabels = [];
+        $agesTotal = [];
+
+        foreach($ages as $age) {
+            $agesLabels[] = $age->age;
+            $agesTotal[] = $age->total;
+        }
+
+        $ageLabels = implode(",", $ageLabels);
+        $agesTotal = implode(",", $agesTotal);
 
         return view('components.age-chart', compact('ageLabels', 'agesTotal'));
     }

@@ -16,4 +16,8 @@ class AnswerStatus extends Model
     {
         return $this->hasMany(Answer::class);
     }
+
+    public function user() {
+        return $this->answers->count() > 0 ? $this->answers[0]->user : null;
+    } 
 }
