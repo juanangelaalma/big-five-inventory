@@ -25,11 +25,20 @@ class AverageBar extends Component
      */
     public function render(): View|Closure|string
     {
+        $start_date = request()->get('start-date');
+        $end_date = request()->get('end-date');
+
         $answersWithQuestions = Answer::with(['instrument' => function ($query) {
             $query->with(['dimension' => function ($query) {
                 $query->select('id', 'name');
             }])->select('id', 'dimension_id', 'reverse');
-        }])->whereHas('answerStatus', function ($query) {
+        }])->whereHas('answerStatus', function ($query) use ($start_date, $end_date) {
+            if($start_date) {
+                $query->where('created_at', '>', $start_date);
+            };
+            if($end_date) {
+                $query->where('created_at', '<', $end_date);
+            };
             $query->where('status', 'done');
         })->get();
 

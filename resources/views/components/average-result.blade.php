@@ -35,7 +35,7 @@
                 </td>
                 <td class="px-4 py-3">
                     <div class="flex items-center text-sm">
-                        <p class="font-semibold">{{ $sum / count($results) }}</p>
+                        <p class="font-semibold">{{ count($results) > 0 ? $sum / count($results) : 0 }}</p>
                     </div>
                 </td>
             </tr>

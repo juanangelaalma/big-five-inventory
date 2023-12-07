@@ -23,8 +23,17 @@ class AgeChart extends Component
      */
     public function render(): View|Closure|string
     {
-        $ages = User::whereHas('answers', function ($query) {
-            $query->whereHas('answerStatus', function ($query) {
+        $start_date = request()->get('start-date');
+        $end_date = request()->get('end-date');
+
+        $ages = User::whereHas('answers', function ($query) use ($start_date, $end_date) {
+            $query->whereHas('answerStatus', function ($query) use ($start_date, $end_date) {
+                if($start_date) {
+                    $query->where('created_at', '>', $start_date);
+                };
+                if($end_date) {
+                    $query->where('created_at', '<', $end_date);
+                };
                 $query->where('status', 'done');
             });
         })->join('profiles', 'profiles.user_id', 'users.id')
@@ -39,7 +48,7 @@ class AgeChart extends Component
         $agesTotal = [];
 
         foreach($ages as $age) {
-            $agesLabels[] = $age->age;
+            $ageLabels[] = $age->age;
             $agesTotal[] = $age->total;
         }
 

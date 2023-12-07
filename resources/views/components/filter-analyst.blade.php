@@ -1,4 +1,4 @@
-@props(['action' => '', 'start_date' => '', 'end_date' => '', 'major' => '', 'gender' => ''])
+@props(['action' => '', 'startdate' => '', 'enddate' => '', 'major' => '', 'gender' => '', 'charts' => null])
 
 <form action="{{ $action }}" method="POST">
     @csrf
@@ -6,11 +6,11 @@
         <h4 class="font-semibold">Filter berdasarkan</h4>
         <div class="flex w-full">
             <div class="w-1/2 pr-2">
-                <x-text-input name="start_date" type="date" value="{{ $start_date }}" placeholder="Tanggal minimum"
+                <x-text-input name="start_date" type="date" value="{{ $startdate }}" placeholder="Tanggal minimum"
                     label="Tanggal minimum" />
             </div>
             <div class="w-1/2 pl-2">
-                <x-text-input name="end_date" type="date" value="{{ $end_date }}" placeholder="Tanggal maksimum"
+                <x-text-input name="end_date" type="date" value="{{ $enddate }}" placeholder="Tanggal maksimum"
                     label="Tanggal maksimum" />
             </div>
         </div>
@@ -18,24 +18,32 @@
             <div class="mt-4">
                 <h4 class="mb-3 font-semibold">Grafik yang ingin ditampilkan</h4>
                 <div class="flex items-center space-x-3">
-                    <input type="checkbox" id="checkbox-chart-gender" name="chart-gender">
+                    <input type="checkbox" id="checkbox-chart-gender" name="gender-chart" @checked(in_array('gender-chart', $charts))>
                     <label for="checkbox-chart-gender">Jenis Kelamin</label>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <input type="checkbox" id="checkbox-chart-result" name="chart-result">
+                    <input type="checkbox" id="checkbox-chart-result" name="average-result" @checked(in_array('average-result', $charts))>
                     <label for="checkbox-chart-result">Hasil Analisis</label>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <input type="checkbox" id="checkbox-chart-major" name="chart-major">
+                    <input type="checkbox" id="checkbox-chart-average-bar" name="average-bar" @checked(in_array('average-bar', $charts))>
+                    <label for="checkbox-chart-average-bar">Bar Hasil Analisis</label>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <input type="checkbox" id="checkbox-chart-major" name="major-chart" @checked(in_array('major-chart', $charts))>
                     <label for="checkbox-chart-major">Prodi</label>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <input type="checkbox" id="checkbox-chart-batch" name="chart-batch">
+                    <input type="checkbox" id="checkbox-chart-batch" name="batch-chart" @checked(in_array('batch-chart', $charts))>
                     <label for="checkbox-chart-batch">Angkatan</label>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <input type="checkbox" id="checkbox-chart-age" name="chart-age">
+                    <input type="checkbox" id="checkbox-chart-age" name="age-chart" @checked(in_array('age-chart', $charts))>
                     <label for="checkbox-chart-age">Umur Responden</label>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <input type="checkbox" id="checkbox-chart-birth-location" name="birth-location-chart" @checked(in_array('birth-location-chart', $charts))>
+                    <label for="checkbox-chart-birth-location">Tempat Lahir Responden</label>
                 </div>
             </div>
         </div>

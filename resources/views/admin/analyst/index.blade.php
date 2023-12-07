@@ -12,14 +12,20 @@
             <script src="{{ asset('js/charts-birth-location.js') }}" defer></script>
         </x-slot>
     </div>
-    <x-filter-analyst action="{{ route('admin.analyst.filter') }}" />
+    <x-filter-analyst :charts="$charts" action="{{ route('admin.analyst.filter') }}" :startdate="$start_date" :enddate="$end_date" />
     <div class="grid gap-6 mb-8 md:grid-cols-2">
-        <x-gender-chart />
-        <x-average-result />
-        <x-average-bar />
-        <x-age-chart />
-        <x-batch-chart />
-        <x-major-chart />
-        <x-birth-location-chart />
+        @if ($charts)
+            @foreach ($charts as $chart)
+                <x-dynamic-component :component="$chart" />
+            @endforeach
+        @else
+            <x-gender-chart />
+            <x-average-result />
+            <x-average-bar />
+            <x-age-chart />
+            <x-batch-chart />
+            <x-major-chart />
+            <x-birth-location-chart />
+        @endif
     </div>
 </x-admin-layout>
