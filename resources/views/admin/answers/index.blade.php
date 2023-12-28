@@ -50,6 +50,9 @@
                   @endforeach
               </tbody>
           </table>
-      </div>
+          <div class="p-2">
+            {{ $answer_statuses->links() }}
+          </div>
+        </div>
   </div>
 </x-admin-layout>

@@ -110,7 +110,7 @@ class AnswerController extends Controller
             });
         }
 
-        $answer_statuses = $answer_statuses->get();
+        $answer_statuses = $answer_statuses->paginate(15);
 
         $level = getPathLevel();
 
