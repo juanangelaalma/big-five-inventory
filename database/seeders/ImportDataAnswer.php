@@ -17,7 +17,7 @@ class ImportDataAnswer extends Seeder
      */
     public function run(): void
     {
-        $filePath = "../../data/pretest.csv";
+        $filePath = base_path("data/pretest.csv");
         
         $fileContents = file($filePath);
 
