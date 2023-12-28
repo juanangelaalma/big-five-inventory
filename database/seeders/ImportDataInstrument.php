@@ -18,7 +18,7 @@ class ImportDataInstrument extends Seeder
     {
         $headers = ['Instrumen', 'Dimensi', 'Reverse'];
 
-        $filePath = "C:\Users\juanl\Downloads\Instruments - Sheet1 (2).csv";
+        $filePath = "../../data/instruments.csv";
         $headersAsString = implode(',', $headers);
 
         $fileContents = file($filePath);

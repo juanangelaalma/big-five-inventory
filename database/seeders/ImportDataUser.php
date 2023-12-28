@@ -20,7 +20,7 @@ class ImportDataUser extends Seeder
     {
         $headers = ["No", "Email Address", "NIM", "NAMA", "Angkatan", "Program Studi", "Jenis Kelamin", "Tempat Lahir", "Tanggal Lahir", "Usia", "Suku"];
 
-        $filePath = "C:\Users\juanl\Downloads\Data Peserta.csv";
+        $filePath = "../../data/user.csv";
         $headersAsString = implode(",", $headers);
 
         
