@@ -4,6 +4,7 @@ namespace App\View\Components\Admin;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class Header extends Component
@@ -21,6 +22,7 @@ class Header extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.admin.header');
+        $user = Auth::user();
+        return view('components.admin.header', compact('user'));
     }
 }

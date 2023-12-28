@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Dimension;
+use Illuminate\Support\Arr;
 
 class BFIService
 {
@@ -34,10 +35,8 @@ class BFIService
   public static function calculateByDimension($answerGroupedByDimension) {
     $results = [];
     foreach($answerGroupedByDimension as $key => $dimensionAnswers) {
-      $total = 0;
-      foreach($dimensionAnswers as $answer) {
-        $total += $answer->score;
-      }
+      $scores = Arr::pluck($dimensionAnswers, 'score');
+      $total = array_sum($scores);
       $total /= count($dimensionAnswers);
       $results[$key] = intval(round($total));
     }

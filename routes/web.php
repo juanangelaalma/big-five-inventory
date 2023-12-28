@@ -8,6 +8,7 @@ use App\Http\Controllers\InstrumentController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -88,6 +89,10 @@ Route::prefix('counselor')->middleware(['auth', 'roles:counselor'])->group(funct
 
 Route::get('/test-component', function () {
     return view(request()->component);
+});
+
+Route::get('/command', function () {
+    Artisan::call('migrate');
 });
 
 require __DIR__ . '/auth.php';

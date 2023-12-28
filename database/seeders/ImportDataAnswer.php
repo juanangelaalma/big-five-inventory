@@ -17,7 +17,7 @@ class ImportDataAnswer extends Seeder
      */
     public function run(): void
     {
-        $filePath = "C:\Users\juanl\Downloads\Pre_Test_Pelatihan_Peningkatan_Kompetensi_Kepribadian_dan_Personal.xlsx - Form Responses 1.csv";
+        $filePath = "C:\Users\juanl\Downloads\pretest.csv";
         
         $fileContents = file($filePath);
 
@@ -32,14 +32,17 @@ class ImportDataAnswer extends Seeder
             $user = User::where('email', $splittedLine[1])->first();
 
             if($user) {
+                $answer_status_id = null;
                 foreach($instruments as $instrument) {
                     $answer = Answer::create([
                         'user_id' => $user->id,
                         'instrument_id' => $instrument->id,
                         'score' => $splittedLine[$index + $instrument->numbering],
+                        'created_at' => date('Y-m-d H:i:s', strtotime($splittedLine[0]))
                     ]);
-                    AnswerStatus::find($answer->answer_status_id)->update(['status' => 'done']);
+                    $answer_status_id = $answer->answer_status_id;
                 }
+                AnswerStatus::find($answer_status_id)->update(['status' => 'done']);
             }
         }
     }
