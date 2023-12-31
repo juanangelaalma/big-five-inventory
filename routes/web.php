@@ -72,6 +72,7 @@ Route::prefix('admin')->middleware(['auth', 'roles:admin'])->group(function () {
     Route::get('/answers/{answerStatusId}/pdf', [PDFController::class, 'downloadResult'])->name('answers.result.details.pdf');
 
     Route::get('/analyst', [AnalystController::class, 'index'])->name('admin.analyst');
+    Route::get('/analyst/pdf', [AnalystController::class, 'pdf'])->name('admin.analyst.pdf');
     Route::post('/analyst/filter', [AnalystController::class, 'filter'])->name('admin.analyst.filter');
 });
 
