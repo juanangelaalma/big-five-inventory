@@ -49,6 +49,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="p-2">
+                {{ $answer_statuses->links() }}
+            </div>
         </div>
     </div>
 </x-counselor-layout>
