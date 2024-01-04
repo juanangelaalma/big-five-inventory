@@ -2,7 +2,7 @@
 
 <form action="{{ $action }}" method="POST">
     @csrf
-    <div class="bg-white w-full mb-4 p-6" x-data="{ showMoreFilter: true }">
+    <div class="bg-white w-full mb-4 p-6" x-data="{ showMoreFilter: false }">
         <h4 class="font-semibold">Filter berdasarkan</h4>
         <div class="flex w-full">
             <div class="w-1/2 pr-2">
