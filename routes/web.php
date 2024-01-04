@@ -85,6 +85,7 @@ Route::prefix('counselor')->middleware(['auth', 'roles:counselor'])->group(funct
     Route::get('/answers/{answerStatusId}/pdf', [PDFController::class, 'downloadResult'])->name('answers.result.details.pdf');
     
     Route::get('/analyst', [AnalystController::class, 'index'])->name('counselor.analyst');
+    Route::get('/analyst/pdf', [AnalystController::class, 'pdf'])->name('counselor.analyst.pdf');
     Route::post('/analyst/filter', [AnalystController::class, 'filter'])->name('counselor.analyst.filter');
 });
 
