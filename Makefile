@@ -6,3 +6,9 @@ shell:
 
 shell-db:
 	docker exec -it big-five-inventory-mysql-1 bash -l
+
+zip:
+	chmod +x zip.sh && ./zip.sh
+
+del-zip:
+	rm ./files.zip
