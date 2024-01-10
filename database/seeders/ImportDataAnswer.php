@@ -22,14 +22,15 @@ class ImportDataAnswer extends Seeder
         $fileContents = file($filePath);
 
         unset($fileContents[0]);
-        unset($fileContents[1]);
 
         $instruments = Instrument::orderBy('numbering', 'ASC')->get();
+
+        $fails = [];
         
         foreach($fileContents as $line) {
             $splittedLine = explode(",", $line);
             $index = 10;
-            $user = User::where('email', $splittedLine[1])->first();
+            $user = User::where('email', str_replace('"', '', $splittedLine[1]))->first();
 
             if($user) {
                 $answer_status_id = null;
@@ -43,7 +44,11 @@ class ImportDataAnswer extends Seeder
                     $answer_status_id = $answer->answer_status_id;
                 }
                 AnswerStatus::find($answer_status_id)->update(['status' => 'done']);
+            } else {
+                $fails[] = $splittedLine;
             }
         }
+
+        Log::info($fails);
     }
 }
