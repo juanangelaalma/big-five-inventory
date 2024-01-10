@@ -10,5 +10,8 @@ shell-db:
 zip:
 	chmod +x zip.sh && ./zip.sh
 
+zip-with-vendor:
+	chmod +x zip.sh && ./zip.sh with_vendor
+
 del-zip:
 	rm ./files.zip

@@ -23,6 +23,10 @@ files_and_folders_to_zip=(
   "vite.config.js"
 )
 
+if [ "$1" == "with_vendor" ]; then
+  files_and_folders_to_zip+=("vendor")
+fi
+
 zip -r "$file_name" "${files_and_folders_to_zip[@]}"
 
 echo "Successfully zipped: $file_name"
