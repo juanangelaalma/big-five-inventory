@@ -37,7 +37,7 @@ class BFIService
     foreach($answerGroupedByDimension as $key => $dimensionAnswers) {
       $scores = Arr::pluck($dimensionAnswers, 'score');
       $total = array_sum($scores);
-      $total /= count($dimensionAnswers);
+      $total /= count($scores);
       $results[$key] = intval(round($total));
     }
     return $results;
