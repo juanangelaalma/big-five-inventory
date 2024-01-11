@@ -18,21 +18,11 @@
                     <x-guest.primary-button href="{{ route('register') }}" class="lg:w-1/2 py-3">
                         Daftar
                     </x-guest.primary-button>
-                    <button
-                        class="flex items-center py-4 text-sm font-medium px-7 text-dark-grey-700 hover:text-dark-grey-900 transition duration-300 rounded-2xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            class="w-5 h-5 mr-2">
-                            <path fill-rule="evenodd"
-                                d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        Book a free call
-                    </button>
                 </div>
             </div>
             <div class="items-center justify-end hidden col-span-1 md:flex">
                 <img class="w-4/5 rounded-md"
-                    src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/motion-tailwind/img/header-1.png"
+                    src="{{ asset('images/header.webp') }}"
                     alt="header image">
             </div>
         </div>

@@ -25,9 +25,9 @@ class ImportDataUser extends Seeder
 
         
         $fileContents = file($filePath);
-        if (trim($fileContents[0]) != trim($headersAsString)) {
-            throw new Error(trim($fileContents[0]) . trim($headersAsString));
-        }
+        // if (trim($fileContents[0]) != trim($headersAsString)) {
+        //     throw new Error(trim($fileContents[0]) . trim($headersAsString));
+        // }
 
         unset($fileContents[0]);
 

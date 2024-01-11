@@ -79,7 +79,7 @@ class InstrumentController extends Controller
         $instrument->dimension_id = $request->dimension;
         $instrument->save();
 
-        return back();
+        return back()->with('success', 'Instrument berhasil diupdate');
     }
 
     /**

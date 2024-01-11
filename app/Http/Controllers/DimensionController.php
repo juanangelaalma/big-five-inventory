@@ -56,7 +56,7 @@ class DimensionController extends Controller
         $dimension->high_percentile_description = $request->high_percentile_description;
         $dimension->save();
 
-        return back();
+        return back()->with('success', 'Dimensi berhasil diupdate');
     }
 
     public function destroy(Dimension $dimension)

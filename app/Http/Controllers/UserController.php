@@ -89,7 +89,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return back();
+        return back()->with('success', 'User berhasil diupdate');
     }
 
     public function destroy(User $user)

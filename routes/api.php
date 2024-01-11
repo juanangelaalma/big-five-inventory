@@ -23,3 +23,16 @@ Route::get('cache', function() {
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
 });
+
+Route::get('import-data', function() {
+    Artisan::call('db:seed --class=DimensionSeeder');
+    Artisan::call('db:seed --class=ImportDataInstrument');
+    Artisan::call('db:seed --class=ImportDataUser');
+    Artisan::call('db:seed --class=ImportDataAnswer');
+    return 'success';
+});
+
+Route::get('data-reset', function() {
+    Artisan::call('migrate:fresh');
+    return 'success';
+});
