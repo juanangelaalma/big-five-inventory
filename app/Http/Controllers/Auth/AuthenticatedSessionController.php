@@ -40,7 +40,7 @@ class AuthenticatedSessionController extends Controller
                 $redirect_url = RouteServiceProvider::ROOT_PATH_COUNSELOR;
                 break;
         }
-        return redirect()->route($redirect_url);
+        return redirect($redirect_url);
     }
 
     /**
