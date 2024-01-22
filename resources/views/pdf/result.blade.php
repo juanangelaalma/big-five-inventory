@@ -75,26 +75,26 @@
                     </tr>
                 </thead>
                 <tbody style="background-color: #fff; border-bottom: 1px solid #e2e8f0; dark:border-gray-700;">
-                    @foreach ($results as $dimension => $result)
+                    @foreach ($results as $result)
                         <tr style="color: #4a5568; dark:text-gray-400;">
-                            <td style="padding: 0.75rem; font-weight: 600;">{{ $dimension }}</td>
-                            <td style="padding: 0.75rem;">{{ $result['low_percentile_description'] }}</td>
+                            <td style="padding: 0.75rem; font-weight: 600;">{{ $result->name }}</td>
+                            <td style="padding: 0.75rem;">{{ $result->low_percentile_description }}</td>
                             <td
                                 style="padding: 0.75rem; font-weight: 600; background-color: #ebf5ff; text-align: center;">
-                                {{ $result['total'] == 1 ? 'X' : '' }}</td>
+                                {{ $result->score == 1 ? 'X' : '' }}</td>
                             <td style="padding: 0.75rem; font-weight: 600; text-align: center;">
-                                {{ $result['total'] == 2 ? 'X' : '' }}</td>
+                                {{ $result->score == 2 ? 'X' : '' }}</td>
                             <td
                                 style="padding: 0.75rem; font-weight: 600; background-color: #ebf5ff; text-align: center;">
-                                {{ $result['total'] == 3 ? 'X' : '' }}</td>
+                                {{ $result->score == 3 ? 'X' : '' }}</td>
                             <td style="padding: 0.75rem; font-weight: 600; text-align: center;">
-                                {{ $result['total'] == 4 ? 'X' : '' }}</td>
+                                {{ $result->score == 4 ? 'X' : '' }}</td>
                             <td
                                 style="padding: 0.75rem; font-weight: 600; background-color: #ebf5ff; text-align: center;">
-                                {{ $result['total'] == 5 ? 'X' : '' }}
+                                {{ $result->score == 5 ? 'X' : '' }}
                             </td>
                             <td style="padding: 0.75rem;">
-                                {{ $result['high_percentile_description'] }}
+                                {{ $result->high_percentile_description }}
                             </td>
                         </tr>
                     @endforeach

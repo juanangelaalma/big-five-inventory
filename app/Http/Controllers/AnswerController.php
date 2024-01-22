@@ -6,12 +6,13 @@ use App\Models\Answer;
 use App\Models\AnswerStatus;
 use App\Models\Dimension;
 use App\Models\User;
+use App\Services\CalculateBFIService;
 use App\Services\BFIService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AnswerController extends Controller
-{
+{   
     public function result()
     {
         $user = Auth::user();
@@ -23,33 +24,14 @@ class AnswerController extends Controller
         return view('guest.answers.result', compact('answers'));
     }
 
-    private function getAnswerWithQuestion($answerStatusId)
-    {
-        return Answer::with(['instrument' => function ($query) {
-            $query->with(['dimension' => function ($query) {
-                $query->select('id', 'name', 'low_percentile_description', 'high_percentile_description');
-            }])->select('id', 'dimension_id', 'reverse');
-        }])->where('answer_status_id', $answerStatusId)->get();
-    }
-
-    private function calculateResults($answersWithQuestion)
-    {
-        $invertedAnswers = BFIService::correctInvertedAnswer($answersWithQuestion);
-        $groupedAnswer = BFIService::groupAnswerByDimension($invertedAnswers);
-        $results = BFIService::calculateByDimension($groupedAnswer);
-        $results = BFIService::orderByDimension($results);
-        return $results;
-    }
-
     public function resultDetails($answerStatusId)
     {
         $user = Auth::user();
         $answer_status = AnswerStatus::find($answerStatusId);
         $answered_at = $answer_status->updated_at;
 
-        $answersWithQuestion = $this->getAnswerWithQuestion($answer_status->id);
-
-        $results = $this->calculateResults($answersWithQuestion);
+        $results = CalculateBFIService::getResultFromAnswerStatus($answerStatusId);
+        $results = CalculateBFIService::mergeWithDimensionDetail($results);
 
         return view('guest.answers.details', compact('user', 'answered_at', 'results'));
     }
@@ -60,9 +42,8 @@ class AnswerController extends Controller
         $user = $answer_status->answers->count() > 0 ? $answer_status->answers[0]->user : null;
         $answered_at = $answer_status->updated_at;
 
-        $answersWithQuestion = $this->getAnswerWithQuestion($answer_status->id);
-
-        $results = $this->calculateResults($answersWithQuestion);
+        $results = CalculateBFIService::getResultFromAnswerStatus($answerStatusId);
+        $results = CalculateBFIService::mergeWithDimensionDetail($results);
 
         $level = getPathLevel();
 

@@ -77,23 +77,23 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                    @foreach ($results as $dimension => $result)
+                    @foreach ($results as $result)
                         <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3 font-semibold">{{ $dimension }}</td>
+                            <td class="px-4 py-3 font-semibold">{{ $result->name }}</td>
                             <td class="px-4 py-3">
-                                {{ $result['low_percentile_description'] }}
+                                {{ $result->low_percentile_description }}
                             </td>
                             <td class="px-4 py-3 font-semibold bg-blue-50 text-center">
-                                {{ $result['total'] == 1 ? 'X' : '' }}</td>
-                            <td class="px-4 py-3 font-semibold">{{ $result['total'] == 2 ? 'X' : '' }}</td>
+                                {{ $result->score == 1 ? 'X' : '' }}</td>
+                            <td class="px-4 py-3 font-semibold">{{ $result->score == 2 ? 'X' : '' }}</td>
                             <td class="px-4 py-3 font-semibold bg-blue-50 text-center">
-                                {{ $result['total'] == 3 ? 'X' : '' }}</td>
-                            <td class="px-4 py-3 font-semibold">{{ $result['total'] == 4 ? 'X' : '' }}</td>
+                                {{ $result->score == 3 ? 'X' : '' }}</td>
+                            <td class="px-4 py-3 font-semibold">{{ $result->score == 4 ? 'X' : '' }}</td>
                             <td class="px-4 py-3 font-semibold bg-blue-50 text-center">
-                                {{ $result['total'] == 5 ? 'X' : '' }}
+                                {{ $result->score == 5 ? 'X' : '' }}
                             </td>
                             <td class="px-4 py-3">
-                                {{ $result['high_percentile_description'] }}
+                                {{ $result->high_percentile_description }}
                             </td>
                         </tr>
                     @endforeach

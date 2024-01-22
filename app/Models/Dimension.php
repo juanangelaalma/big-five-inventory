@@ -10,4 +10,8 @@ class Dimension extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'order', 'low_percentile_description', 'high_percentile_description'];
+
+    public function answers() {
+        return $this->hasManyThrough(Answer::class, Instrument::class);
+    }
 }
