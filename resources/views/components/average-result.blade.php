@@ -21,12 +21,12 @@
                     </td>
                     <td class="px-4 py-3">
                         <div class="flex items-center text-sm">
-                            <p class="font-semibold">{{ $result['total'] }}</p>
+                            <p class="font-semibold">{{ $result }}</p>
                         </div>
                     </td>
                 </tr>
                 @php
-                    $sum += $result['total']
+                    $sum += $result
                 @endphp
             @endforeach
             <tr class="text-gray-700 dark:text-gray-400 border-t-gray-400">

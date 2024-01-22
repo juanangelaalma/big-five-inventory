@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Answer;
 use App\Models\AnswerStatus;
-use App\Models\Dimension;
-use App\Models\User;
 use App\Services\CalculateBFIService;
-use App\Services\BFIService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
