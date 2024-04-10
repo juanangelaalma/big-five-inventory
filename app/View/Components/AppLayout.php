@@ -16,7 +16,7 @@ class AppLayout extends Component
     {
         $this->hidenavbar = $hidenavbar;
     }
-    
+
     public function render(): View
     {
         return view('layouts.app');

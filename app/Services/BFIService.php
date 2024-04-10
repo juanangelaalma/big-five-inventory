@@ -7,54 +7,56 @@ use Illuminate\Support\Arr;
 
 class BFIService
 {
-  public static function correctInvertedAnswer($answersWithQuestion)
-  {
-    foreach ($answersWithQuestion as $answer) {
-      if ($answer->instrument->reverse) {
-        $answer->result = 6 - $answer->score;
-      } else {
-        $answer->result = $answer->score;
-      }
+    public static function correctInvertedAnswer($answersWithQuestion)
+    {
+        foreach ($answersWithQuestion as $answer) {
+            if ($answer->instrument->reverse) {
+                $answer->result = 6 - $answer->score;
+            } else {
+                $answer->result = $answer->score;
+            }
+        }
+        return $answersWithQuestion;
     }
-    return $answersWithQuestion;
-  }
 
-  public static function groupAnswerByDimension($answers)
-  {
-    $dimensionArray = [];
-    foreach ($answers as $answer) {
-      if (isset($dimensionArray[$answer->dimension->name])) {
-        array_push($dimensionArray[$answer->dimension->name], $answer);
-      } else {
-        $dimensionArray[$answer->dimension->name] = [$answer];
-      }
+    public static function groupAnswerByDimension($answers)
+    {
+        $dimensionArray = [];
+        foreach ($answers as $answer) {
+            if (isset($dimensionArray[$answer->dimension->name])) {
+                array_push($dimensionArray[$answer->dimension->name], $answer);
+            } else {
+                $dimensionArray[$answer->dimension->name] = [$answer];
+            }
+        }
+        return $dimensionArray;
     }
-    return $dimensionArray;
-  }
 
-  public static function calculateByDimension($answerGroupedByDimension) {
-    $results = [];
-    foreach($answerGroupedByDimension as $key => $dimensionAnswers) {
-      $scores = Arr::pluck($dimensionAnswers, 'score');
-      $total = array_sum($scores);
-      $total /= count($scores);
-      $results[$key] = intval(round($total));
+    public static function calculateByDimension($answerGroupedByDimension)
+    {
+        $results = [];
+        foreach($answerGroupedByDimension as $key => $dimensionAnswers) {
+            $scores = Arr::pluck($dimensionAnswers, 'score');
+            $total = array_sum($scores);
+            $total /= count($scores);
+            $results[$key] = intval(round($total));
+        }
+        return $results;
     }
-    return $results;
-  }
 
-  public static function orderByDimension($calculatedResults) {
-    $dimensions = Dimension::orderBy('order', 'ASC')->get(['name', 'low_percentile_description', 'high_percentile_description']);
-    $results = [];
-    foreach($dimensions as $dimension) {
-      if(isset($calculatedResults[$dimension->name])) {
-        $results[$dimension->name] = [
-          'low_percentile_description' => $dimension->low_percentile_description,
-          'high_percentile_description' => $dimension->high_percentile_description,
-          'total' => $calculatedResults[$dimension->name]
-        ];
-      }
+    public static function orderByDimension($calculatedResults)
+    {
+        $dimensions = Dimension::orderBy('order', 'ASC')->get(['name', 'low_percentile_description', 'high_percentile_description']);
+        $results = [];
+        foreach($dimensions as $dimension) {
+            if(isset($calculatedResults[$dimension->name])) {
+                $results[$dimension->name] = [
+                  'low_percentile_description' => $dimension->low_percentile_description,
+                  'high_percentile_description' => $dimension->high_percentile_description,
+                  'total' => $calculatedResults[$dimension->name]
+                ];
+            }
+        }
+        return $results;
     }
-    return $results;
-  }
 }

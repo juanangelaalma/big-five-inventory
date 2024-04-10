@@ -20,7 +20,8 @@ class Alert extends Component
     public $type = "";
     public $message = "";
 
-    public function __construct($type = "success", $message = "") {
+    public function __construct($type = "success", $message = "")
+    {
         $this->type = $type;
         if(!$message) {
             $this->message = $this->messages[$type];

@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function counselor() {
+    public function counselor()
+    {
         return view('counselor.index');
     }
 }

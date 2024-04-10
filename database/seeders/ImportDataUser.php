@@ -23,7 +23,7 @@ class ImportDataUser extends Seeder
         $filePath = base_path("data/user.csv");
         $headersAsString = implode(",", $headers);
 
-        
+
         $fileContents = file($filePath);
         // if (trim($fileContents[0]) != trim($headersAsString)) {
         //     throw new Error(trim($fileContents[0]) . trim($headersAsString));
@@ -49,10 +49,10 @@ class ImportDataUser extends Seeder
                 'student_number' => $splittedLine[2],
                 'batch' => $splittedLine[4],
                 'major' => $splittedLine[5],
-                'birth_location' => $splittedLine[7], 
-                'birth_date' => date('Y-m-d', strtotime($splittedLine[8])), 
+                'birth_location' => $splittedLine[7],
+                'birth_date' => date('Y-m-d', strtotime($splittedLine[8])),
                 'gender' => $splittedLine[6] === 'Perempuan' ? 'female' : 'male',
-                'ethnicity' => $splittedLine[10], 
+                'ethnicity' => $splittedLine[10],
             ]);
             $profile->save();
         }

@@ -15,7 +15,8 @@ class SidebarLink extends Component
         public string $href,
         public string $title,
         public bool $active = false
-    ) {}
+    ) {
+    }
 
     /**
      * Get the view / contents that represent the component.

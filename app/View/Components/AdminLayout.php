@@ -13,7 +13,8 @@ class AdminLayout extends Component
      */
     public function __construct(
         public string $pageTitle = ""
-    ){}
+    ) {
+    }
 
     /**
      * Get the view / contents that represent the component.

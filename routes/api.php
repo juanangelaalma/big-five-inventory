@@ -19,12 +19,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('cache', function() {
+Route::get('cache', function () {
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
 });
 
-Route::get('import-data', function() {
+Route::get('import-data', function () {
     Artisan::call('db:seed --class=DimensionSeeder');
     Artisan::call('db:seed --class=ImportDataInstrument');
     Artisan::call('db:seed --class=ImportDataUser');
@@ -32,7 +32,7 @@ Route::get('import-data', function() {
     return 'success';
 });
 
-Route::get('data-reset', function() {
+Route::get('data-reset', function () {
     Artisan::call('migrate:fresh');
     return 'success';
 });

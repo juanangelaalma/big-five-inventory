@@ -18,11 +18,12 @@ class AnalystController extends Controller
         unset($chartParams['end-date']);
 
         $charts = array_keys($chartParams);
-        
+
         return view("$level.analyst.index", compact('charts', 'start_date', 'end_date'));
     }
 
-    public function filter(Request $request) {
+    public function filter(Request $request)
+    {
         $level = getPathLevel();
 
         $params = $this->filterParams();
@@ -32,7 +33,8 @@ class AnalystController extends Controller
         return redirect()->route("$level.analyst", $filteredParams);
     }
 
-    public function pdf() {
+    public function pdf()
+    {
         $params = $this->filterParams();
         $filteredParams = array_filter($params, fn ($value) => !is_null($value));
         $level = getPathLevel();
@@ -48,7 +50,8 @@ class AnalystController extends Controller
         return view("$level.analyst.pdf", compact('charts', 'start_date', 'end_date'));
     }
 
-    private function filterParams() {
+    private function filterParams()
+    {
         return [
             'start-date' => request()->get('start-date'),
             'end-date' => request()->get('end-date'),

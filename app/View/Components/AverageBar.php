@@ -34,7 +34,7 @@ class AverageBar extends Component
         $labels = implode(",", $labels);
         $data = $results;
         $data = implode(',', $data);
-        
+
         return view('components.average-bar', compact('results', 'labels', 'data'));
     }
 }

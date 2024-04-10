@@ -50,7 +50,7 @@ class MajorChart extends Component
 
         $majorLabels = implode(",", $majorLabels);
         $majorsTotal = implode(",", $majorsTotal);
-        
+
         return view('components.major-chart', compact('majorLabels', 'majorsTotal'));
     }
 }

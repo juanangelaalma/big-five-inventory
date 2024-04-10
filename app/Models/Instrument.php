@@ -11,11 +11,13 @@ class Instrument extends Model
 
     protected $fillable = ['content', 'numbering', 'reverse', 'dimension_id'];
 
-    public function dimension() {
+    public function dimension()
+    {
         return $this->belongsTo(Dimension::class);
     }
 
-    public function answers() {
+    public function answers()
+    {
         return $this->hasMany(Answer::class);
     }
 }

@@ -18,7 +18,7 @@ class ImportDataAnswer extends Seeder
     public function run(): void
     {
         $filePath = base_path("data/posttest.csv");
-        
+
         $fileContents = file($filePath);
 
         unset($fileContents[0]);
@@ -26,7 +26,7 @@ class ImportDataAnswer extends Seeder
         $instruments = Instrument::orderBy('numbering', 'ASC')->get();
 
         $fails = [];
-        
+
         foreach($fileContents as $line) {
             $splittedLine = explode(",", $line);
             $index = 10;

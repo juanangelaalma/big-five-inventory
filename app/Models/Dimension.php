@@ -11,7 +11,8 @@ class Dimension extends Model
 
     protected $fillable = ['name', 'order', 'low_percentile_description', 'high_percentile_description'];
 
-    public function answers() {
+    public function answers()
+    {
         return $this->hasManyThrough(Answer::class, Instrument::class);
     }
 }

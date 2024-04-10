@@ -11,7 +11,10 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use SoftDeletes;
     public const ROLES = ['admin', 'counselor', 'student'];
 
     /**
@@ -46,27 +49,33 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function profile() {
+    public function profile()
+    {
         return $this->hasOne(Profile::class);
     }
 
-    public function answers() {
+    public function answers()
+    {
         return $this->hasMany(Answer::class);
     }
 
-    public function isAdmin() {
+    public function isAdmin()
+    {
         return $this->role === 'admin';
     }
 
-    public function isCounselor() {
+    public function isCounselor()
+    {
         return $this->role === 'counselor';
     }
 
-    public function isStudent() {
+    public function isStudent()
+    {
         return $this->role === 'student';
     }
 
-    public function hasCompleteProfile() {
+    public function hasCompleteProfile()
+    {
         if(!$this->profile) {
             return false;
         }
@@ -79,7 +88,8 @@ class User extends Authenticatable
                 && $this->profile->ethnicity;
     }
 
-    public function hasCompleteInstruments() {
+    public function hasCompleteInstruments()
+    {
         return $this->answers->count() > 0;
     }
 }

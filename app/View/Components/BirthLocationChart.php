@@ -26,8 +26,8 @@ class BirthLocationChart extends Component
         $start_date = request()->get('start-date');
         $end_date = request()->get('end-date');
 
-        $birthLocations = User::whereHas('answers', function ($query)  use ($start_date, $end_date) {
-            $query->whereHas('answerStatus', function ($query)  use ($start_date, $end_date) {
+        $birthLocations = User::whereHas('answers', function ($query) use ($start_date, $end_date) {
+            $query->whereHas('answerStatus', function ($query) use ($start_date, $end_date) {
                 if($start_date) {
                     $query->where('created_at', '>', $start_date);
                 };
@@ -50,7 +50,7 @@ class BirthLocationChart extends Component
 
         $birthLocationLabels = implode(",", $birthLocationLabels);
         $birthLocationsTotal = implode(",", $birthLocationsTotal);
-        
+
         return view('components.birth-location-chart', compact('birthLocationLabels', 'birthLocationsTotal'));
     }
 }

@@ -21,7 +21,7 @@ class InstrumentSeeder extends Seeder
 
         $index = 0;
 
-        for($i=0; $i<$numberOfInstruments; $i++) {
+        for($i = 0; $i < $numberOfInstruments; $i++) {
             if ($i !== 0 && $i % $numMultiple === 0) {
                 $index++;
             }

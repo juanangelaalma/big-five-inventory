@@ -13,7 +13,8 @@ class UpdateProfileForm extends Component
      * Create a new component instance.
      */
     public $user;
-    public function __construct($user = "") {
+    public function __construct($user = "")
+    {
         $this->user = $user;
     }
 
