@@ -1,4 +1,4 @@
-<x-admin-layout pageTitle="Edit Dimensi">
+<x-admin-layout pageTitle="Ubah Dimensi">
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
         <!-- Validation inputs -->
         <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -7,7 +7,7 @@
                 @method('PUT')
                 <x-text-input name="name" placeholder="Nama" type="text" label="Nama"
                     value="{{ old('name', $dimension->name) }}" />
-                <x-text-input name="order" placeholder="Order" type="number" label="Order"
+                <x-text-input name="order" placeholder="Urutan" type="number" label="Urutan"
                     value="{{ old('order', $dimension->order) }}" />
                 <label for="description" class="block text-sm my-2">
                     <span class="text-gray-700 dark:text-gray-400">Persentil Rendah</span>
@@ -31,7 +31,7 @@
                 </label>
                 <div class="w-full lg:w-[100px]">
                     <x-guest.primary-button type="submit" class="mt-6">
-                        Buat
+                        Ubah
                     </x-guest.primary-button>
                 </div>
             </form>
