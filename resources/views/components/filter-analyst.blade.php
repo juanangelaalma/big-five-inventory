@@ -23,11 +23,11 @@
                 </div>
                 <div class="flex items-center space-x-3">
                     <input type="checkbox" id="checkbox-chart-result" name="average-result" @checked(in_array('average-result', $charts))>
-                    <label for="checkbox-chart-result">Hasil Analisis</label>
+                    <label for="checkbox-chart-result">Tabel Hasil Analisis</label>
                 </div>
                 <div class="flex items-center space-x-3">
                     <input type="checkbox" id="checkbox-chart-average-bar" name="average-bar" @checked(in_array('average-bar', $charts))>
-                    <label for="checkbox-chart-average-bar">Bar Hasil Analisis</label>
+                    <label for="checkbox-chart-average-bar">Grafik Hasil Analisis</label>
                 </div>
                 <div class="flex items-center space-x-3">
                     <input type="checkbox" id="checkbox-chart-major" name="major-chart" @checked(in_array('major-chart', $charts))>
@@ -39,11 +39,11 @@
                 </div>
                 <div class="flex items-center space-x-3">
                     <input type="checkbox" id="checkbox-chart-age" name="age-chart" @checked(in_array('age-chart', $charts))>
-                    <label for="checkbox-chart-age">Umur Responden</label>
+                    <label for="checkbox-chart-age">Usia</label>
                 </div>
                 <div class="flex items-center space-x-3">
                     <input type="checkbox" id="checkbox-chart-birth-location" name="birth-location-chart" @checked(in_array('birth-location-chart', $charts))>
-                    <label for="checkbox-chart-birth-location">Tempat Lahir Responden</label>
+                    <label for="checkbox-chart-birth-location">Tempat Lahir</label>
                 </div>
             </div>
         </div>

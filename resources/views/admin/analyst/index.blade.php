@@ -1,4 +1,4 @@
-<x-admin-layout pageTitle="Analisis">
+<x-admin-layout pageTitle="Hasil Analisis">
     <div class="w-full">
         <x-slot name="head">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
