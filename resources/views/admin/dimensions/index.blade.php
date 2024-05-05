@@ -1,4 +1,4 @@
-<x-admin-layout pageTitle="Instrumen">
+<x-admin-layout pageTitle="Dimensi">
     <div class="w-1/2 lg:w-1/5 mb-5">
         <x-guest.primary-button href="{{ route('admin.dimensions.create') }}">Tambah Dimensi</x-guest.primary-button>
     </div>
@@ -9,10 +9,10 @@
                     <tr
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3">Nama</th>
-                        <th class="px-4 py-3">Order</th>
-                        <th class="px-4 py-3">Low Percentile Description</th>
-                        <th class="px-4 py-3">High Percentile Description</th>
-                        <th class="px-4 py-3">Action</th>
+                        <th class="px-4 py-3">Urutan</th>
+                        <th class="px-4 py-3">Perilaku Persentil Rendah</th>
+                        <th class="px-4 py-3">Perilaku Persentil Tinggi</th>
+                        <th class="px-4 py-3">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -34,11 +34,11 @@
                             </td>
                             <td class="px-4 py-3 flex space-x-2">
                                 <a href="{{ route('admin.dimensions.edit', $dimension) }}"
-                                    class="text-sm bg-orange-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-orange-500 transition-colors duration-200">Edit</a>
+                                    class="text-sm bg-orange-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-orange-500 transition-colors duration-200">Ubah</a>
                                 <form action="{{ route('admin.dimensions.destroy', $dimension) }}" method="POST">
                                     @csrf
                                     <button type="submit"
-                                        class="text-sm bg-red-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-red-500 transition-colors duration-200">Delete</a>
+                                        class="text-sm bg-red-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-red-500 transition-colors duration-200">Hapus</a>
                                 </form>
                             </td>
                         </tr>

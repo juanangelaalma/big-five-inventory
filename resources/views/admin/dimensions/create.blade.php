@@ -5,7 +5,7 @@
             <form action="{{ route('admin.dimensions.store') }}" method="POST">
                 @csrf
                 <x-text-input name="name" placeholder="Nama" type="text" label="Nama" value="{{ old('name') }}" />
-                <x-text-input name="order" placeholder="Order" type="number" label="Order"
+                <x-text-input name="order" placeholder="Order" type="number" label="Urutan"
                     value="{{ old('order') }}" />
                 <label for="low_percentile_description" class="block text-sm my-2">
                     <span class="text-gray-700 dark:text-gray-400">Persentil Rendah</span>
