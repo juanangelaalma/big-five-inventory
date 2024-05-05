@@ -6,13 +6,13 @@
                 @csrf
                 <x-text-input name="content" placeholder="Instrumen" type="text" label="Instrumen"
                     value="{{ old('content') }}" />
-                <x-text-input name="numbering" placeholder="Penomoran" type="number" label="Penomoran"
+                <x-text-input name="numbering" placeholder="Nomor" type="number" label="Nomor"
                     value="{{ old('numbering') }}" />
                 <x-text-select name="reverse" label="Reverse">
                     <option value="1">Ya</option>
                     <option value="0">Tidak</option>
                 </x-text-select>
-                <x-text-select name="dimension" label="SKala">
+                <x-text-select name="dimension" label="Dimensi">
                     @foreach ($dimensions as $dimension)
                         <option @if ($dimension->id === old('dimension')) @selected(true) @endif value="{{ $dimension->id }}">
                             {{ ucwords($dimension->name) }}</option>

@@ -9,10 +9,10 @@
                     <tr
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3">Instrumen</th>
-                        <th class="px-4 py-3">Penomoran</th>
+                        <th class="px-4 py-3">Nomor</th>
                         <th class="px-4 py-3">Reverse</th>
-                        <th class="px-4 py-3">Skala</th>
-                        <th class="px-4 py-3">Action</th>
+                        <th class="px-4 py-3">Dimensi</th>
+                        <th class="px-4 py-3">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -34,11 +34,11 @@
                             </td>
                             <td class="px-4 py-3 flex space-x-2">
                                 <a href="{{ route('admin.instruments.edit', $instrument) }}"
-                                    class="text-sm bg-orange-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-orange-500 transition-colors duration-200">Edit</a>
+                                    class="text-sm bg-orange-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-orange-500 transition-colors duration-200">Ubah</a>
                                 <form action="{{ route('admin.instruments.destroy', $instrument) }}" method="POST">
                                     @csrf
                                     <button type="submit"
-                                        class="text-sm bg-red-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-red-500 transition-colors duration-200">Delete</a>
+                                        class="text-sm bg-red-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-red-500 transition-colors duration-200">Hapus</a>
                                 </form>
                             </td>
                         </tr>
