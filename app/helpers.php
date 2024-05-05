@@ -34,3 +34,13 @@ function getPathLevel()
     $level = $paths[1];
     return $level;
 }
+
+function translateRole($role) {
+    $roles = [
+        'admin' => 'Admin',
+        'student' => 'Siswa',
+        'counselor' => 'Konselor'
+    ];
+
+    return $roles[strtolower($role)];
+}

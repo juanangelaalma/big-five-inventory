@@ -1,4 +1,4 @@
-<x-admin-layout pageTitle="Edit User">
+<x-admin-layout pageTitle="Ubah Pengguna">
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
         <!-- Validation inputs -->
         <form action="{{ route('admin.users.update', $user) }}" method="POST">
@@ -13,11 +13,11 @@
                     <x-text-input name="name" label="Nama" value="{{ $user->name }}" />
                 </div>
                 <div class="w-full lg:w-1/2 lg:px-1 pt-2">
-                    <x-text-select name="role" label="Role" class="mt-0">
+                    <x-text-select name="role" label="Hak Akses" class="mt-0">
                         @foreach ($roles as $role)
                             <option @if ($role === $user->role) @selected(true) @endif
                                 value="{{ $role }}">
-                                {{ ucwords($role) }}</option>
+                                {{ translateRole($role) }}</option>
                         @endforeach
                     </x-text-select>
                 </div>
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="w-[120px]">
-                <x-guest.primary-button class="lg:py-3" type="submit">Save</x-guest.primary-button>
+                <x-guest.primary-button class="lg:py-3" type="submit">Simpan</x-guest.primary-button>
             </div>
         </form>
 </x-admin-layout>

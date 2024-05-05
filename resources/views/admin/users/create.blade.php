@@ -1,4 +1,4 @@
-<x-admin-layout pageTitle="Tambah User">
+<x-admin-layout pageTitle="Tambah Pengguna">
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
         <!-- Validation inputs -->
         <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -9,10 +9,10 @@
                     value="{{ old('password') }}" />
                 <x-text-input name="name" placeholder="Nama" type="text" label="Nama"
                     value="{{ old('name') }}" />
-                <x-text-select name="role" label="Role">
+                <x-text-select name="role" label="Hak Akses">
                     @foreach ($roles as $role)
                         <option @if ($role === old('role')) @selected(true) @endif value="{{ $role }}">
-                            {{ ucwords($role) }}</option>
+                            {{ translateRole($role) }}</option>
                     @endforeach
                 </x-text-select>
                 <div class="w-full lg:w-[100px]">

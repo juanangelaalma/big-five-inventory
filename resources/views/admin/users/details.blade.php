@@ -1,4 +1,4 @@
-<x-admin-layout pageTitle="Details User">
+<x-admin-layout pageTitle="Detail Pengguna">
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
         <!-- Validation inputs -->
         <div
@@ -12,8 +12,8 @@
                     value="{{ $user->name }}" />
             </div>
             <div class="w-full lg:w-1/2 lg:px-1">
-                <x-text-input disabled label="Role"
-                    value="{{ $user->role }}" />
+                <x-text-input disabled label="Hak Akses"
+                    value="{{ translateRole($user->role) }}" />
             </div>
             <div class="w-full lg:w-1/2 lg:px-1">
                 <x-text-input disabled label="NIM"
@@ -29,7 +29,7 @@
             </div>
             <div class="w-full lg:w-1/2 lg:px-1">
                 <x-text-input disabled label="Jenis Kelamin"
-                    value="{{ avoidNullError($user->profile, 'gender') }}" />
+                    value="{{ translateGender(avoidNullError($user->profile, 'gender')) }}" />
             </div>
             <div class="w-full lg:w-1/2 lg:px-1">
                 <x-text-input disabled label="Tempat Lahir"

@@ -1,6 +1,6 @@
-<x-admin-layout pageTitle="Users">
+<x-admin-layout pageTitle="Pengguna">
     <div class="w-1/2 lg:w-1/5 mb-5">
-        <x-guest.primary-button href="{{ route('admin.users.create') }}">Tambah User</x-guest.primary-button>
+        <x-guest.primary-button href="{{ route('admin.users.create') }}">Tambah Pengguna</x-guest.primary-button>
     </div>
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
@@ -8,16 +8,23 @@
                 <thead>
                     <tr
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                        <th class="px-4 py-3">Name</th>
+                        <th class="px-4 py-3">No</th>
+                        <th class="px-4 py-3">Nama</th>
                         <th class="px-4 py-3">Email</th>
                         <th class="px-4 py-3">Tempat, Tanggal Lahir</th>
-                        <th class="px-4 py-3">Role</th>
-                        <th class="px-4 py-3">Action</th>
+                        <th class="px-4 py-3">Hak Akses</th>
+                        <th class="px-4 py-3">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                    @php $no=1 @endphp
                     @foreach ($users as $user)
                         <tr class="text-gray-700 dark:text-gray-400">
+                            <td class="px-4 py-3">
+                                <div class="flex items-center text-sm">
+                                    <p class="font-semibold">{{ $no }}</p>
+                                </div>
+                            </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center text-sm">
                                     <p class="font-semibold">{{ $user->name }}</p>
@@ -36,14 +43,15 @@
                                 <a href="{{ route('admin.users.show', $user) }}"
                                     class="text-sm bg-green-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-green-500 transition-colors duration-200">Detail</a>
                                 <a href="{{ route('admin.users.edit', $user) }}"
-                                    class="text-sm bg-orange-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-orange-500 transition-colors duration-200">Edit</a>
+                                    class="text-sm bg-orange-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-orange-500 transition-colors duration-200">Ubah</a>
                                 <form action="{{ route('admin.users.destroy', $user) }}" method="POST">
                                     @csrf
                                     <button type="submit"
-                                        class="text-sm bg-red-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-red-500 transition-colors duration-200">Delete</a>
+                                        class="text-sm bg-red-400 px-2 py-1 rounded-md text-white font-semibold hover:bg-red-500 transition-colors duration-200">Hapus</a>
                                 </form>
                             </td>
                         </tr>
+                        @php $no++ @endphp
                     @endforeach
                 </tbody>
             </table>
