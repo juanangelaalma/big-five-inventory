@@ -40,7 +40,7 @@ class GenderChart extends Component
             ->select(DB::raw('count(users.id) as total, profiles.gender as gender'))
             ->groupBy('profiles.gender')->get(['gender', 'total']);
 
-        $genderLabels = $genders->count() > 0 ? implode(",", [$genders[0]->gender, $genders->count() > 1 ? $genders[1]->gender : ""]) : "male,female";
+        $genderLabels = $genders->count() > 0 ? implode(",", [translateGender($genders[0]->gender), $genders->count() > 1 ? translateGender($genders[1]->gender) : ""]) : "Laki-laki,Perempuan";
         $gendersTotal = $genders->count() > 0 ? implode(",", [$genders[0]->total, $genders->count() > 1 ? $genders[1]->total : "0"]) : "0,0";
 
         return view('components.gender-chart', compact('genderLabels', 'gendersTotal'));
