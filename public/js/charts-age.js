@@ -1,41 +1,6 @@
-/**
- * For usage, visit Chart.js docs https://www.chartjs.org/docs/latest/
- */
-const barAgeConfig = {
-    type: "bar",
-    data: {
-        labels: [],
-        datasets: [
-            {
-                label: "Rata-rata",
-                backgroundColor: "#7E3AF2",
-                borderWidth: 1,
-                data: [],
-            },
-        ],
-    },
-    options: {
-        scales: {
-            yAxes: [
-                {
-                    ticks: {
-                        beginAtZero: true,
-                        stepSize: 1
-                    },
-                },
-            ],
-            xAxes: [
-                {
-                    ticks: {
-                        callback: function(value, index, ticks) {
-                            return value + ' tahun'
-                        }
-                    }
-                }
-            ]
-        },
-    },
-};
+const barAgeConfig = barChartConfig
+
+barAgeConfig.data.datasets[0].backgroundColor = '#6466F1'
 
 const barsAge = document.getElementById("barsAge");
 const ageBar = document.getElementById("age-bar");
