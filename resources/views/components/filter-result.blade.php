@@ -21,7 +21,7 @@
                         label="Prodi" />
                 </div>
                 <div class="w-1/2 pl-2">
-                    <x-text-select name="gender" class="mt-2" label="Role">
+                    <x-text-select name="gender" class="mt-2" label="Jenis Kelamin">
                         <option value="">
                             Pilih...
                         </option>
