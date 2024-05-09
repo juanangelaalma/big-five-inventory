@@ -16,7 +16,7 @@
                         <th class="px-4 py-3">Jenis Kelamin</th>
                         <th class="px-4 py-3">Prodi</th>
                         <th class="px-4 py-3">Tanggal Pengisian</th>
-                        <th class="px-4 py-3">Action</th>
+                        <th class="px-4 py-3">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
