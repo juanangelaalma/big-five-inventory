@@ -44,7 +44,7 @@ class BirthLocationChart extends Component
         $birthLocationsTotal = [];
 
         foreach ($birthLocations as $birthLocation) {
-            $birthLocationLabels[] = $birthLocation->birth_location;
+            $birthLocationLabels[] = ucwords(strtolower($birthLocation->birth_location));
             $birthLocationsTotal[] = $birthLocation->total;
         }
 
