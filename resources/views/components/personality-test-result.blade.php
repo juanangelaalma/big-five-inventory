@@ -36,7 +36,7 @@
                     <tr>
                         <td class="py-1 w-[40%]">Pendidikan</td>
                         <td class="py-1 w-[4%] lg:w-[2%]"> : </td>
-                        <td class="py-1 w-1/2"> S1 </td>
+                        <td class="py-1 w-1/2"> S1/D4 </td>
                     </tr>
                 </table>
             </div>

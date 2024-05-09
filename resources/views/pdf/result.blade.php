@@ -33,7 +33,7 @@
                     <tr>
                         <td style="padding-top: 0.25rem; width: 40%;">Pendidikan</td>
                         <td style="padding-top: 0.25rem; width: 2%;"> : </td>
-                        <td style="padding-top: 0.25rem; width: 50%;"> S1 </td>
+                        <td style="padding-top: 0.25rem; width: 50%;"> S1/D4 </td>
                     </tr>
                 </table>
             </div>

@@ -24,7 +24,7 @@ class AnswerController extends Controller
     {
         $user = Auth::user();
         $answer_status = AnswerStatus::find($answerStatusId);
-        $answered_at = $answer_status->updated_at;
+        $answered_at = $answer_status->created_at;
 
         $results = CalculateBFIService::getResultFromAnswerStatus($answerStatusId);
         $results = CalculateBFIService::mergeWithDimensionDetail($results);
@@ -36,7 +36,7 @@ class AnswerController extends Controller
     {
         $answer_status = AnswerStatus::find($answerStatusId);
         $user = $answer_status->answers->count() > 0 ? $answer_status->answers[0]->user : null;
-        $answered_at = $answer_status->updated_at;
+        $answered_at = $answer_status->created_at;
 
         $results = CalculateBFIService::getResultFromAnswerStatus($answerStatusId);
         $results = CalculateBFIService::mergeWithDimensionDetail($results);

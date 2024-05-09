@@ -12,7 +12,7 @@ class PDFController extends Controller
     {
         $answer_status = AnswerStatus::find($answerStatusId);
         $user = $answer_status->user();
-        $answered_at = $answer_status->updated_at;
+        $answered_at = $answer_status->created_at;
 
         $results = CalculateBFIService::getResultFromAnswerStatus($answerStatusId);
         $results = CalculateBFIService::mergeWithDimensionDetail($results);
