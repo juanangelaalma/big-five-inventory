@@ -1,10 +1,14 @@
 <x-admin-layout pageTitle="Pengguna">
+    <x-slot name="head">
+        @vite('resources/js/datatables/userTable.js')
+    </x-slot>
+
     <div class="w-1/2 lg:w-1/5 mb-5">
         <x-guest.primary-button href="{{ route('admin.users.create') }}">Tambah Pengguna</x-guest.primary-button>
     </div>
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
-            <table class="w-full whitespace-no-wrap">
+            <table id="userTable" class="w-full whitespace-no-wrap">
                 <thead>
                     <tr
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
