@@ -1,4 +1,4 @@
-@props(['action' => '', 'start_date' => '', 'end_date' => '', 'major' => '', 'gender' => '', 'dateonly' => false])
+@props(['action' => '', 'start_date' => '', 'end_date' => '', 'major' => '', 'gender' => '', 'dateonly' => false, 'name', 'studentnumber'])
 
 <form action="{{ $action }}" method="POST">
     @csrf
@@ -35,6 +35,16 @@
                 </div>
             </div>
         @endif
+        <div class="flex w-full">
+            <div class="w-1/2 pr-2">
+                <x-text-input name="name" type="text" value="{{ $name }}" placeholder="Nama"
+                    label="Nama" />
+            </div>
+            <div class="w-1/2 pl-2">
+                <x-text-input name="student_number" type="text" value="{{ $studentnumber }}" placeholder="NIM"
+                    label="NIM" />
+            </div>
+        </div>
         <button
             class="block px-4 py-2 w-[100px] ml-auto mr-0 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 border border-transparent rounded-lg focus:outline-none {{ getPathLevel() === 'admin' ? 'bg-purple-600 focus:shadow-outline-purple active:bg-purple-600 hover:bg-purple-700' : 'bg-green-600 focus:shadow-outline-green active:bg-green-600 hover:bg-green-700' }}">
             Terapkan

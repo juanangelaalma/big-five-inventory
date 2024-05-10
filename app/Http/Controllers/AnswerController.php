@@ -52,6 +52,8 @@ class AnswerController extends Controller
         $end_date = $request->query('end_date');
         $major = $request->query('major');
         $gender = $request->query('gender');
+        $name = $request->query('name');
+        $student_number = $request->query('student_number');
 
         $answer_statuses = AnswerStatus::with(['answers' => function ($query) {
             $query->with(['user' => function ($query) {
@@ -87,11 +89,29 @@ class AnswerController extends Controller
             });
         }
 
-        $answer_statuses = $answer_statuses->paginate(15);
+        if($name) {
+            $answer_status = $answer_statuses->whereHas('answers', function ($query) use ($name) {
+                $query->whereHas('user', function ($query) use ($name) {
+                    $query->where('name', $name);
+                });
+            });
+        }
+
+        if($student_number) {
+            $answer_statuses = $answer_statuses->whereHas('answers', function ($query) use ($student_number) {
+                $query->whereHas('user', function ($query) use ($student_number) {
+                    $query->whereHas('profile', function ($query) use ($student_number) {
+                        $query->where('student_number', $student_number);
+                    });
+                });
+            });
+        }
+
+        $answer_statuses = $answer_statuses->get();
 
         $level = getPathLevel();
 
-        return view("$level.answers.index", compact('answer_statuses', 'start_date', 'end_date', 'major', 'gender'));
+        return view("$level.answers.index", compact('answer_statuses', 'start_date', 'end_date', 'major', 'gender', 'name', 'student_number'));
     }
 
     public function filter(Request $request)
@@ -100,12 +120,16 @@ class AnswerController extends Controller
         $end_date = $request->end_date;
         $major = $request->major;
         $gender = $request->gender;
+        $name = $request->name;
+        $student_number = $request->student_number;
 
         $params = [
             'start_date' => $start_date,
             'end_date' => $end_date,
             'major' => $major,
             'gender' => $gender,
+            'name' => $name,
+            'student_number' => $student_number,
         ];
 
         $level = getPathLevel();

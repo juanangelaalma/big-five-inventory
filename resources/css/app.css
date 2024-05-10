@@ -12,3 +12,23 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+
+#predictionResultTable_wrapper .dt-layout-row:first-child {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.dt-paging {
+    padding: 20px 0;
+}
+
+.dt-paging-button {
+    margin: 0 10px;
+    color: gray;
+}
+
+.dt-paging-button.current {
+    font-size: 20px;
+    color: black;
+}
