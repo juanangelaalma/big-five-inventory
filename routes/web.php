@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\DimensionController;
 use App\Http\Controllers\InstrumentController;
+use App\Http\Controllers\LangController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -96,5 +97,7 @@ Route::get('/test-component', function () {
 Route::get('/command', function () {
     Artisan::call('migrate');
 });
+
+Route::get('lang/change', [LangController::class, 'change'])->name('lang.change');
 
 require __DIR__ . '/auth.php';

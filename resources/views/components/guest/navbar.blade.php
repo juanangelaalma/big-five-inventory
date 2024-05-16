@@ -8,6 +8,10 @@
         <x-guest.navbar-links />
     </div>
     <div class="items-center hidden gap-8 md:flex">
+        <div>
+            <a href="{{ route('lang.change', ['lang' => 'id']) }}">ID</a>
+            <a href="{{ route('lang.change', ['lang' => 'en']) }}">EN</a>
+        </div>
         @if ($user)
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
