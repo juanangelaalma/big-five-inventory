@@ -1,17 +1,13 @@
 <section id="introduction" class="bg-purple-600">
     <div class="max-w-6xl mx-auto py-20">
         <div class="flex flex-col">
-            <h2 class="text-4xl font-bold w-full text-center text-white">Mengenal Tes<br>Kepribadian Online</h2>
+            <h2 class="text-4xl font-bold w-full text-center text-white">@lang('welcome.introduction.title')</h2>
             <div class="flex flex-col lg:flex-row space-y-12 lg:space-y-0 justify-center mt-12 items-center px-6">
                 <img class="w-full lg:w-1/2" src="https://nsd.co.id/assets/quiety/img/tools/minat_2.png" alt="">
                 <p class="text-lg lg:pr-6 lg:pl-12 text-semibold text-white text-justify">
-                    Dengan mengikuti tes kepribadian akan memahami diri lebih dalam, potensi kemampuan diri dan arah
-                    pengembangan kepribadian. <br><br>
-                    Dengan memahami diri, akan membantu membuat keputusan yang tepat sesuai dengan style dan
-                    kepribadian, membantu menentukan karir ataupun pekerjaan. <br><br>
-                    Kenali dirimu maka kamu akan mengenal duniamu! <br><br>
+                    @lang('welcome.introduction.description')
                     <a href="" class="flex items-center text-bold">
-                        Coba Sekarang
+                        @lang('welcome.introduction.cta.try')
                         <svg width="24" height="24" viewBox="0 0 24 24" class="ml-2" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
